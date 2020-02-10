@@ -126,6 +126,8 @@ char			*ft_cap_lftoa(long double n, int precision);
 char			*ft_ulltoa_base(unsigned long long value, int base);
 char			*ft_lltoa(long long n);
 int				ft_wstrbytes(wchar_t *wstr);
+ssize_t			ft_wstrlen(const wchar_t *s);
+wchar_t			*ft_wstrnew(size_t size);
 wchar_t			*ft_wstrdup(wchar_t *str);
 int				ft_wclen(wchar_t wc);
 int				ft_putwchar(wchar_t c);

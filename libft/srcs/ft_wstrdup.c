@@ -1,26 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_wstrdup.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/03/04 16:53:10 by jvisser        #+#    #+#                */
-/*   Updated: 2019/03/04 16:58:57 by jvisser       ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <wchar.h>
-#include <stdlib.h>
 #include "libft.h"
+#include <wchar.h>
 
-wchar_t	*ft_wstrdup(wchar_t *str)
+wchar_t	*ft_wstrdup(wchar_t *s)
 {
-	wchar_t			*result;
-	int				len;
+	size_t	len;
+	wchar_t	*new;
 
-	len = ft_wstrbytes(str);
-	result = (wchar_t*)malloc(len + 1);
-	ft_memcpy(result, str, len + 1);
-	return (result);
+	len = ft_wstrlen(s);
+	if (!(new = ft_wstrnew(len)))
+		return (NULL);
+	return (ft_memcpy(new, s, len));
 }
+

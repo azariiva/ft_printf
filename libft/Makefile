@@ -42,7 +42,8 @@ LIBFT_FUNCS = ft_memset ft_memdel ft_strnew ft_strdel ft_strclr ft_striter \
 			  ft_putendl_fd ft_putnbr_fd ft_lstnew ft_lstdelone ft_lstdel \
 			  ft_memcmp ft_lstadd ft_lstiter ft_lstmap \
 			  ft_llabs ft_lltoa ft_ulltoa_base \
-			  ft_cap_lftoa ft_wstrbytes ft_wstrdup \
+			  ft_wstrlen ft_wstrnew ft_wstrdup \
+			  ft_cap_lftoa ft_wstrbytes \
 			  ft_wstrdup ft_wclen ft_putwchar ft_putcharn ft_formatwchar ft_cap_lftoa2 \
 
 # object files

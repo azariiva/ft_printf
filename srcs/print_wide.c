@@ -12,21 +12,6 @@
 
 #include "libftprintf.h"
 
-int		ft_wstrlen(wchar_t *wstr)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = 0;
-	while (wstr[i])
-	{
-		len += ft_wclen(wstr[i]);
-		i++;
-	}
-	return (len);
-}
-
 int		calc_diff_ws(t_pf *pf, wchar_t *str)
 {
 	int i;
