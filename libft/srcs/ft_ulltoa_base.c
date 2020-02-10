@@ -1,13 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ulltoa_base.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhilary <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/10 18:34:34 by fhilary           #+#    #+#             */
+/*   Updated: 2020/02/10 18:36:51 by fhilary          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static char    tobase(unsigned digit)
+static char	tobase(unsigned digit)
 {
-    if (digit <= 9)
-        return (digit + '0');
-    return (digit - 10 + 'a');
+	if (digit <= 9)
+		return (digit + '0');
+	return (digit - 10 + 'a');
 }
 
-static void	fill_arr(char *arr, unsigned long long num, unsigned base, unsigned len)
+static void	fill_arr(char *arr, unsigned long long num, unsigned base, \
+		unsigned len)
 {
 	unsigned i;
 
