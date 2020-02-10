@@ -101,7 +101,7 @@ char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
 char			*ft_itoa(int n);
 void			ft_putchar(char c);
-void			ft_putstr(char const *s);
+ssize_t			ft_putstr(char const *s);
 void			ft_putendl(char const *s);
 void			ft_putnbr(int n);
 void			ft_putchar_fd(char c, int fd);
@@ -118,21 +118,20 @@ void			ft_lstadd(t_list **alst, t_list *new);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
-long long	ft_llabs(long long n);
-/*
-** ft_pritnf
-*/
-char			*ft_cap_lftoa(long double n, int precision);
+long long		ft_llabs(long long n);
 char			*ft_ulltoa_base(unsigned long long value, int base);
 char			*ft_lltoa(long long n);
-int				ft_wstrbytes(wchar_t *wstr);
 ssize_t			ft_wstrlen(const wchar_t *s);
 wchar_t			*ft_wstrnew(size_t size);
 wchar_t			*ft_wstrdup(wchar_t *str);
 int				ft_wclen(wchar_t wc);
-int				ft_putwchar(wchar_t c);
 void			ft_putcharn(char c, size_t n);
-unsigned char	*format_wchar(wchar_t c, size_t *len);
+/*
+** ft_pritnf
+*/
+char			*ft_cap_lftoa(long double n, int precision);
+int				ft_putwchar(wchar_t c);
+unsigned char	*ft_formatwchar(wchar_t c, size_t *len);
 int				ft_cap_lftoa_rounding(long double f_part_c, int precision, long double *f_part, long long *i_part);
 void			ft_cap_lftoa_add_number(int *i, char **result, long double *f_part);
 void			ft_cap_lftoa_set_other_nums(int i, char **result);

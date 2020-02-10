@@ -1,17 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_putwchar.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jvisser <jvisser@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/03/04 13:11:34 by jvisser        #+#    #+#                */
-/*   Updated: 2019/03/04 14:31:26 by jvisser       ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <wchar.h>
-#include <unistd.h>
+#include "libft.h"
 
 static int	ft_putmorewchar(wchar_t c, char *str)
 {
@@ -22,8 +9,7 @@ static int	ft_putmorewchar(wchar_t c, char *str)
 		str[1] = (c & 63) + 128;
 		c = c >> 6;
 		str[0] = (c & 15) + 224;
-		write(1, str, 3);
-		return (3);
+		return (ft_putstr(str));
 	}
 	else if (c >= 0x10000 && c <= 0x10FFFF)
 	{
@@ -34,28 +20,26 @@ static int	ft_putmorewchar(wchar_t c, char *str)
 		str[1] = (c & 63) + 128;
 		c = c >> 6;
 		str[0] = (c & 7) + 240;
-		write(1, str, 4);
-		return (4);
+		return (ft_putstr(str));
 	}
 	return (0);
 }
 
 int			ft_putwchar(wchar_t c)
 {
-	char	str[4];
+	char	str[5];
 
+	ft_bzero(str, 5);
 	if (c >= 0x00 && c <= 0x7F)
 	{
-		write(1, &c, 1);
-		return (1);
+		return (ft_putstr(str));
 	}
 	else if (c >= 0x80 && c <= 0x7FF)
 	{
 		str[1] = (c & 63) + 128;
 		c = c >> 6;
 		str[0] = (c & 31) + 192;
-		write(1, str, 2);
-		return (2);
+		return (ft_putstr(str));
 	}
 	else
 		return (ft_putmorewchar(c, str));

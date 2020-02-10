@@ -18,7 +18,7 @@ static int		validate_address(wchar_t c)
 	unsigned char	*str;
 
 	len = 0;
-	str = format_wchar(c, &len);
+	str = ft_formatwchar(c, &len);
 	if (!str || is_utf8(str, len))
 	{
 		free(str);
