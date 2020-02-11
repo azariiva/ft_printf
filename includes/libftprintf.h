@@ -166,8 +166,6 @@ void			print_num(t_pf *pf);
 void			print_num_d(t_pf *pf, long long num);
 void			print_num_f(t_pf *pf, long double num);
 void			print_txt(t_pf *pf);
-void			print_txt_ws(t_pf *pf, wchar_t *str);
-void			print_txt_wc(t_pf *pf, wchar_t c);
 void			print_base(t_pf *pf);
 
 void			print_txt_c(t_pf *pf, char c);

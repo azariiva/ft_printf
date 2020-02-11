@@ -46,12 +46,8 @@ void	print_decimal(t_pf *pf)
 
 void	print_txt(t_pf *pf)
 {
-	if (pf->data_type == 'S' || (pf->data_type == 's' && (pf->modifier & L_MOD)))
-		print_txt_ws(pf, va_arg(*(pf->valist), wchar_t*));
-	else if (pf->data_type == 's')
+	if (pf->data_type == 's')
 		print_txt_s(pf, va_arg(*(pf->valist), char*));
-	if (pf->data_type == 'C' || (pf->data_type == 'c' && (pf->modifier & L_MOD)))
-		print_txt_wc(pf, (wchar_t)(va_arg(*(pf->valist), char*)));
 	else if (pf->data_type == 'c')
 		print_txt_c(pf, (char)(va_arg(*(pf->valist), char*)));
 	if (pf->data_type == '%')
