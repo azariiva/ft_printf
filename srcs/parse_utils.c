@@ -51,14 +51,14 @@ int		is_data_type(char c)
 
 void	validate_flags(t_pf *pf)
 {
-	if (PLUS_FLAG == 1 && SPACE_FLAG == 1)
-		SPACE_FLAG = 0;
-	if (MIN_FLAG == 1 && ZERO_FLAG == 1)
-		ZERO_FLAG = 0;
-	if (pf->precision != 0 && ZERO_FLAG == 1
+	if ((pf->flag & PLUS_FLAG) && (pf->flag & SPACE_FLAG))
+		pf->flag &= ~SPACE_FLAG;
+	if ((pf->flag & MIN_FLAG) && (pf->flag & ZERO_FLAG))
+		pf->flag &= ~ZERO_FLAG;
+	if (pf->precision != 0 && (pf->flag & ZERO_FLAG)
 		&& (pf->data_type == 'd' || pf->data_type == 'i'
 		|| pf->data_type == 'o' || pf->data_type == 'O'
 		|| pf->data_type == 'u' || pf->data_type == 'U'
 		|| pf->data_type == 'x' || pf->data_type == 'X'))
-		ZERO_FLAG = 0;
+		pf->flag &= ~ZERO_FLAG;
 }

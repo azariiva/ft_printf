@@ -36,13 +36,13 @@ static int		validate_wide_data(t_pf *pf, va_list valist)
 	wchar_t	c;
 	wchar_t	*str;
 
-	if (pf->data_type == 'C' || (pf->data_type == 'c' && L_MOD))
+	if (pf->data_type == 'C' || (pf->data_type == 'c' && (pf->modifier & L_MOD)))
 	{
 		c = va_arg(valist, wchar_t);
 		if (validate_address(c))
 			return (0);
 	}
-	else if (pf->data_type == 'S' || (pf->data_type == 's' && L_MOD))
+	else if (pf->data_type == 'S' || (pf->data_type == 's' && (pf->modifier & L_MOD)))
 	{
 		str = va_arg(valist, wchar_t*);
 		while (str && *str)
@@ -66,8 +66,8 @@ int				validate_next(t_pf *pf, char *format, va_list valist)
 	if (format[i] == '%')
 	{
 		parse_placeholder(pf, format, &i, valist);
-		if (pf->data_type == 'C' || (pf->data_type == 'c' && L_MOD)
-		|| pf->data_type == 'S' || (pf->data_type == 's' && L_MOD))
+		if (pf->data_type == 'C' || (pf->data_type == 'c' && (pf->modifier & L_MOD))
+		|| pf->data_type == 'S' || (pf->data_type == 's' && (pf->modifier & L_MOD)))
 		{
 			if (!validate_wide_data(pf, valist))
 			{

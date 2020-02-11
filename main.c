@@ -3,6 +3,6 @@
 
 int main(void)
 {
-    ft_printf("%f ", 5.35434565);
+    ft_printf("%ld", 2147483648);
     return (0);
 }

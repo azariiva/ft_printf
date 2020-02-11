@@ -79,7 +79,7 @@ void	print_txt_ws(t_pf *pf, wchar_t *str)
 	else
 		free_str = false;
 	diff = calc_diff_ws(pf, str);
-	if (MIN_FLAG != 1)
+	if (!(pf->flag & MIN_FLAG))
 		print_padding(pf, &diff);
 	print_precision_ws(pf, str);
 	if (diff > 0)
@@ -98,9 +98,9 @@ void	print_txt_wc(t_pf *pf, wchar_t c)
 	if (diff < 0)
 		diff = 0;
 	pf->len += diff;
-	if (MIN_FLAG != 1)
+	if (!(pf->flag & MIN_FLAG))
 	{
-		if (ZERO_FLAG)
+		if (pf->flag & ZERO_FLAG)
 			ft_putcharn('0', diff);
 		else
 			ft_putcharn(' ', diff);

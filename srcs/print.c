@@ -16,13 +16,13 @@ void	print_num(t_pf *pf)
 {
 	long long	n;
 
-	if (LL_MOD || J_MOD || Z_MOD)
+	if ((pf->modifier & LL_MOD) || (pf->modifier & J_MOD) || (pf->modifier & Z_MOD))
 		n = va_arg(*(pf->valist), long long);
-	else if (L_MOD || pf->data_type == 'D')
+	else if ((pf->modifier & L_MOD) || pf->data_type == 'D')
 		n = (long long)va_arg(*(pf->valist), long);
-	else if (HH_MOD)
+	else if (pf->modifier & HH_MOD)
 		n = (long long)((signed char)(va_arg(*(pf->valist), int)));
-	else if (H_MOD)
+	else if (pf->modifier & H_MOD)
 		n = (long long)((short)(va_arg(*(pf->valist), int)));
 	else
 		n = (long long)va_arg(*(pf->valist), int);
@@ -35,9 +35,9 @@ void	print_decimal(t_pf *pf)
 
 	if (!(pf->precision))
 		pf->precision = 6;
-	if (CAP_L_MOD)
+	if (pf->modifier & CAP_L_MOD)
 		n = va_arg(*(pf->valist), long double);
-	else if (L_MOD)
+	else if (pf->modifier & L_MOD)
 		n = (long double)(va_arg(*(pf->valist), double));
 	else
 		n = (long double)(va_arg(*(pf->valist), double));
@@ -46,11 +46,11 @@ void	print_decimal(t_pf *pf)
 
 void	print_txt(t_pf *pf)
 {
-	if (pf->data_type == 'S' || (pf->data_type == 's' && L_MOD))
+	if (pf->data_type == 'S' || (pf->data_type == 's' && (pf->modifier & L_MOD)))
 		print_txt_ws(pf, va_arg(*(pf->valist), wchar_t*));
 	else if (pf->data_type == 's')
 		print_txt_s(pf, va_arg(*(pf->valist), char*));
-	if (pf->data_type == 'C' || (pf->data_type == 'c' && L_MOD))
+	if (pf->data_type == 'C' || (pf->data_type == 'c' && (pf->modifier & L_MOD)))
 		print_txt_wc(pf, (wchar_t)(va_arg(*(pf->valist), char*)));
 	else if (pf->data_type == 'c')
 		print_txt_c(pf, (char)(va_arg(*(pf->valist), char*)));
@@ -71,15 +71,15 @@ void	print_base(t_pf *pf)
 	else
 		base = 10;
 	n = 0;
-	if (LL_MOD || J_MOD)
+	if ((pf->modifier & LL_MOD) || (pf->modifier & J_MOD))
 		n = va_arg(*(pf->valist), unsigned long long);
-	else if (L_MOD || Z_MOD || pf->data_type == 'p'
+	else if ((pf->modifier & L_MOD) || (pf->modifier & Z_MOD) || pf->data_type == 'p'
 	|| pf->data_type == 'O' || pf->data_type == 'U')
 		n = (unsigned long long)va_arg(*(pf->valist), unsigned long);
-	else if (HH_MOD)
+	else if (pf->modifier & HH_MOD)
 		n = (unsigned long long)((unsigned char)va_arg(*(pf->valist),
 			unsigned int));
-	else if (H_MOD)
+	else if (pf->modifier & H_MOD)
 		n = (unsigned long long)((unsigned short)va_arg(*(pf->valist),
 			unsigned int));
 	else

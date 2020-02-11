@@ -30,7 +30,7 @@ int		calc_diff_s(t_pf *pf, char *str)
 
 void	print_padding(t_pf *pf, int *diff)
 {
-	if (ZERO_FLAG)
+	if (pf->flag & ZERO_FLAG)
 		ft_putcharn('0', *diff);
 	else
 		ft_putcharn(' ', *diff);
@@ -50,7 +50,7 @@ void	print_txt_s(t_pf *pf, char *str)
 	else
 		free_b = false;
 	diff = calc_diff_s(pf, str);
-	if (MIN_FLAG != 1)
+	if (!(pf->flag & MIN_FLAG))
 		print_padding(pf, &diff);
 	if (pf->precision != -1)
 	{
@@ -73,9 +73,9 @@ void	print_txt_c(t_pf *pf, char c)
 	if (pf->width > 0)
 		diff = pf->width - 1;
 	pf->len += diff;
-	if (MIN_FLAG != 1)
+	if (!(pf->flag & MIN_FLAG))
 	{
-		if (ZERO_FLAG)
+		if (pf->flag & ZERO_FLAG)
 			ft_putcharn('0', diff);
 		else
 			ft_putcharn(' ', diff);

@@ -16,7 +16,7 @@ void	print_0x(t_pf *pf, char *tmp)
 {
 	if (pf->data_type == 'p')
 		ft_putstr_add_len("0x", pf);
-	else if (HASH_FLAG && tmp[0] != '0')
+	else if ((pf->flag & HASH_FLAG) && tmp[0] != '0')
 	{
 		if (pf->data_type == 'x')
 			ft_putstr_add_len("0x", pf);
@@ -46,7 +46,7 @@ void	print_zero_flag_ull(t_pf *pf, int *diff, char *tmp)
 
 void	print_ull(t_pf *pf, int *diff, char *tmp)
 {
-	if (MIN_FLAG != 1)
+	if (!(pf->flag & MIN_FLAG))
 		print_padding_add_len(' ', diff, pf);
 	print_0x(pf, tmp);
 	print_precision(pf, tmp);
@@ -60,7 +60,7 @@ void	print_b(t_pf *pf, unsigned long long num, int base)
 	char	*tmp;
 
 	if (!num && pf->precision == -1
-	&& !(HASH_FLAG && (pf->data_type == 'o' || pf->data_type == 'O')))
+	&& !((pf->flag & HASH_FLAG) && (pf->data_type == 'o' || pf->data_type == 'O')))
 	{
 		if (pf->data_type == 'p')
 			ft_putstr_add_len("0x", pf);
@@ -74,7 +74,7 @@ void	print_b(t_pf *pf, unsigned long long num, int base)
 	if (pf->data_type == 'X')
 		change_to_upper(tmp);
 	diff = calc_diff(pf, tmp);
-	if (ZERO_FLAG == 1)
+	if (pf->flag & ZERO_FLAG)
 		print_zero_flag_ull(pf, &diff, tmp);
 	else
 		print_ull(pf, &diff, tmp);

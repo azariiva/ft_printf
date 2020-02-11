@@ -14,13 +14,13 @@
 
 void	num_prec_zero(t_pf *pf)
 {
-	if (PLUS_FLAG || SPACE_FLAG)
+	if ((pf->flag & PLUS_FLAG) || (pf->flag & SPACE_FLAG))
 		pf->width--;
-	if (MIN_FLAG != 1 && pf->width > 0)
+	if (!(pf->flag & MIN_FLAG) && pf->width > 0)
 		print_padding_add_len(' ', &(pf->width), pf);
-	if (PLUS_FLAG)
+	if (pf->flag & PLUS_FLAG)
 		ft_putchar_add_len('+', pf);
-	if (SPACE_FLAG)
+	if (pf->flag & SPACE_FLAG)
 		ft_putchar_add_len(' ', pf);
 	if (pf->width > 0)
 		ft_putcharn(' ', pf->width);
@@ -33,9 +33,9 @@ void	print_zero_flag_space_plus_flag(t_pf *pf, char **tmp)
 		ft_putchar_add_len('-', pf);
 		(*tmp)++;
 	}
-	else if (PLUS_FLAG)
+	else if (pf->flag & PLUS_FLAG)
 		ft_putchar_add_len('+', pf);
-	else if (SPACE_FLAG)
+	else if (pf->flag & SPACE_FLAG)
 		ft_putchar_add_len(' ', pf);
 }
 
@@ -43,7 +43,7 @@ void	print_zero_flag_num(t_pf *pf, int *diff, char *tmp)
 {
 	if (tmp[0] == '-')
 		pf->width--;
-	if ((PLUS_FLAG == 1 || SPACE_FLAG == 1) && tmp[0] != '-')
+	if (((pf->flag & PLUS_FLAG) || (pf->flag & SPACE_FLAG)) && tmp[0] != '-')
 		(*diff)--;
 	if (pf->precision == -1 && pf->data_type != 'f' && pf->data_type != 'F')
 		pf->precision = (int)ft_strlen(tmp);
@@ -66,7 +66,7 @@ void	print_zero_flag_num(t_pf *pf, int *diff, char *tmp)
 
 void	print_no_zero_flag_num(t_pf *pf, int *diff, char *tmp)
 {
-	if (MIN_FLAG != 1)
+	if (!(pf->flag & MIN_FLAG))
 		print_padding_add_len(' ', diff, pf);
 	print_plus_space_flag(pf, tmp);
 	if (tmp[0] == '-')
@@ -97,7 +97,7 @@ void	print_num_d(t_pf *pf, long long num)
 	if (!tmp)
 		display_error("Out of memory");
 	diff = calc_diff(pf, tmp);
-	if (ZERO_FLAG == 1)
+	if (pf->flag & ZERO_FLAG)
 		print_zero_flag_num(pf, &diff, tmp);
 	else
 		print_no_zero_flag_num(pf, &diff, tmp);

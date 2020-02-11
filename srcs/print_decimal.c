@@ -74,7 +74,7 @@ void	print_num_f(t_pf *pf, long double num)
 	{
 		if (pf->data_type == 'F')
 			change_to_upper(tmp);
-		ZERO_FLAG = 0;
+		pf->flag &= ~ZERO_FLAG;
 		pf->precision = 0;
 		print_txt_s(pf, tmp);
 		free(tmp);
@@ -82,12 +82,12 @@ void	print_num_f(t_pf *pf, long double num)
 	}
 	if (!(is_neg_zero(pf, num, &tmp)))
 		tmp = ft_cap_lftoa(num, pf->precision);
-	if (!(ft_strchr(tmp, '.')) && HASH_FLAG)
+	if (!(ft_strchr(tmp, '.')) && (pf->flag & HASH_FLAG))
 		add_dot(&tmp);
 	if (!tmp)
 		display_error("Out of memory");
 	diff = calc_diff(pf, tmp);
-	if (ZERO_FLAG == 1)
+	if (pf->flag & ZERO_FLAG)
 		print_zero_flag_num(pf, &diff, tmp);
 	else
 		print_no_zero_flag_num(pf, &diff, tmp);

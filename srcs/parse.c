@@ -15,15 +15,15 @@
 void	set_flag(t_pf *pf, char c, int *i)
 {
 	if (c == '-')
-		MIN_FLAG = 1;
+		pf->flag |= MIN_FLAG;
 	else if (c == '+')
-		PLUS_FLAG = 1;
+		pf->flag |= PLUS_FLAG;
 	else if (c == ' ')
-		SPACE_FLAG = 1;
+		pf->flag |= SPACE_FLAG;
 	else if (c == '0')
-		ZERO_FLAG = 1;
+		pf->flag |= ZERO_FLAG;
 	else if (c == '#')
-		HASH_FLAG = 1;
+		pf->flag |= HASH_FLAG;
 	(*i)++;
 }
 
@@ -37,7 +37,7 @@ void	set_width(t_pf *pf, char *str, int *i, va_list valist)
 		if (w < 0)
 		{
 			w *= -1;
-			MIN_FLAG = 1;
+			pf->flag |= MIN_FLAG;
 		}
 		pf->width = (int)w;
 		(*i)++;
@@ -81,23 +81,23 @@ void	set_modifier(t_pf *pf, char *str, int *i)
 	if (str[*i] == 'l')
 	{
 		if (str[(*i) + 1] == 'l')
-			LL_MOD = 1;
+			pf->modifier |= LL_MOD;
 		else
-			L_MOD = 1;
+			pf->modifier |= L_MOD;
 	}
 	if (str[*i] == 'h')
 	{
 		if (str[(*i) + 1] == 'h')
-			HH_MOD = 1;
+			pf->modifier |= HH_MOD;
 		else
-			H_MOD = 1;
+			pf->modifier |= H_MOD;
 	}
 	if (str[*i] == 'L')
-		CAP_L_MOD = 1;
+		pf->modifier |= CAP_L_MOD;
 	if (str[*i] == 'j')
-		J_MOD = 1;
+		pf->modifier |= J_MOD;
 	if (str[*i] == 'z')
-		Z_MOD = 1;
+		pf->modifier |= Z_MOD;
 	(*i)++;
 }
 

@@ -39,14 +39,14 @@ int		calc_diff(t_pf *pf, char *num)
 	int	result;
 
 	result = set_init_diff(pf, num);
-	if (ZERO_FLAG != 1 && ((PLUS_FLAG == 1 && num[0] != '-')
-	|| (SPACE_FLAG == 1 && num[0] != '-')))
+	if (!(pf->flag & ZERO_FLAG) && (((pf->flag & PLUS_FLAG) && num[0] != '-')
+	|| ((pf->flag & SPACE_FLAG) && num[0] != '-')))
 		result--;
 	if (pf->data_type == 'p'
-	|| (HASH_FLAG == 1 && (pf->data_type == 'x'
+	|| ((pf->flag & HASH_FLAG) && (pf->data_type == 'x'
 	|| pf->data_type == 'X') && num[0] != '0'))
 		result -= 2;
-	if ((HASH_FLAG == 1 && (pf->data_type == 'o' || pf->data_type == 'O')
+	if (((pf->flag & HASH_FLAG) && (pf->data_type == 'o' || pf->data_type == 'O')
 	&& num[0] != '0') && pf->precision <= (int)ft_strlen(num))
 		result--;
 	if (result < 0)

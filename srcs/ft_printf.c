@@ -14,10 +14,10 @@
 
 void	reset_pf(t_pf *pf)
 {
-	ft_bzero(pf->flag, sizeof(pf->flag));
+	pf->flag = 0;
 	pf->width = 0;
 	pf->precision = 0;
-	ft_bzero(pf->modifier, sizeof(pf->modifier));
+	pf->modifier = 0;
 	pf->data_type = 0;
 }
 
@@ -71,11 +71,16 @@ int		ft_printf(const char *format, ...)
 	va_copy(va_2, va);
 	pf->valist = &va;
 	pf->format = (char*)format;
+	pf->modifier |= L_MOD;
+	if (pf->modifier & L_MOD)
+	{
 	if (loop_format(pf, va_2))
 		return (-1);
+	}
 	va_end(va);
 	va_end(va_2);
 	length = pf->len;
 	free(pf);
+	
 	return (length);
 }

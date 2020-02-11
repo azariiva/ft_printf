@@ -40,9 +40,9 @@ void	ft_putstr_add_len(char *str, t_pf *pf)
 
 void	print_plus_space_flag(t_pf *pf, char *num)
 {
-	if (PLUS_FLAG == 1 && num[0] != '-')
+	if ((pf->flag & PLUS_FLAG) && num[0] != '-')
 		ft_putchar_add_len('+', pf);
-	if (SPACE_FLAG == 1 && num[0] != '-')
+	if ((pf->flag & SPACE_FLAG) && num[0] != '-')
 		ft_putchar_add_len(' ', pf);
 }
 

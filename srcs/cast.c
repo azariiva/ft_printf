@@ -14,13 +14,13 @@
 
 void	cast_num(t_pf *pf, va_list valist)
 {
-	if (LL_MOD || J_MOD || Z_MOD)
+	if ((pf->modifier & LL_MOD) || (pf->modifier & J_MOD) || (pf->modifier & Z_MOD))
 		va_arg(valist, long long);
-	else if (L_MOD || pf->data_type == 'D')
+	else if ((pf->modifier & L_MOD) || pf->data_type == 'D')
 		va_arg(valist, long);
-	else if (HH_MOD)
+	else if (pf->modifier & HH_MOD)
 		va_arg(valist, int);
-	else if (H_MOD)
+	else if (pf->modifier & H_MOD)
 		va_arg(valist, int);
 	else
 		va_arg(valist, int);
@@ -28,7 +28,7 @@ void	cast_num(t_pf *pf, va_list valist)
 
 void	cast_decimal(t_pf *pf, va_list valist)
 {
-	if (CAP_L_MOD)
+	if (pf->modifier & CAP_L_MOD)
 		va_arg(valist, long double);
 	else
 		(va_arg(valist, double));
@@ -36,11 +36,11 @@ void	cast_decimal(t_pf *pf, va_list valist)
 
 void	cast_txt(t_pf *pf, va_list valist)
 {
-	if (pf->data_type == 'S' || (pf->data_type == 's' && L_MOD))
+	if (pf->data_type == 'S' || (pf->data_type == 's' && (pf->modifier & L_MOD)))
 		va_arg(valist, wchar_t*);
 	else if (pf->data_type == 's')
 		va_arg(valist, char*);
-	if (pf->data_type == 'C' || (pf->data_type == 'c' && L_MOD))
+	if (pf->data_type == 'C' || (pf->data_type == 'c' && (pf->modifier & L_MOD)))
 		va_arg(valist, char*);
 	else if (pf->data_type == 'c')
 		va_arg(valist, char*);
@@ -48,14 +48,14 @@ void	cast_txt(t_pf *pf, va_list valist)
 
 void	cast_base(t_pf *pf, va_list valist)
 {
-	if (LL_MOD || J_MOD)
+	if ((pf->modifier & LL_MOD) || (pf->modifier & J_MOD))
 		va_arg(valist, unsigned long long);
-	else if (L_MOD || Z_MOD || pf->data_type == 'p'
+	else if ((pf->modifier & L_MOD) || (pf->modifier & Z_MOD) || pf->data_type == 'p'
 	|| pf->data_type == 'O' || pf->data_type == 'U')
 		va_arg(valist, unsigned long);
-	else if (HH_MOD)
+	else if (pf->modifier & HH_MOD)
 		va_arg(valist, unsigned int);
-	else if (H_MOD)
+	else if (pf->modifier & H_MOD)
 		va_arg(valist, unsigned int);
 	else
 		va_arg(valist, unsigned int);

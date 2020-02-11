@@ -20,16 +20,36 @@
 # include <stdbool.h>
 # include "../libft/includes/libft.h"
 
+typedef enum	e_typemod
+{
+	L_MOD = 1 << 0,
+	LL_MOD = 1 << 1,
+	H_MOD = 1 << 2,
+	HH_MOD = 1 << 3,
+	CAP_L_MOD = 1 << 4,
+	J_MOD = 1 << 5,
+	Z_MOD = 1 << 6,
+}				t_typemod;
+
+typedef enum	e_typefg
+{
+	MIN_FLAG = 1 << 0,
+	PLUS_FLAG = 1 << 1,
+	SPACE_FLAG = 1 << 2,
+	ZERO_FLAG = 1 << 3,
+	HASH_FLAG = 1 << 4,
+}				t_typefg;
+
 typedef struct	s_pf
 {
 	short		options;
 	int			paramater;
 	int			if_param;
-	char		flag[5];
+	t_typefg	flag;
 	short		flags;
 	int			width;
 	int			precision;
-	char		modifier[7];
+	t_typemod	modifier;
 	char		data_type;
 	int			len;
 	va_list		*valist;
@@ -84,20 +104,6 @@ typedef struct	s_pf
 **	va_list:	holds all variable arguments
 **	format:		hold the complete format of the string
 */
-
-# define MIN_FLAG (pf->flag)[0]
-# define PLUS_FLAG (pf->flag)[1]
-# define SPACE_FLAG (pf->flag)[2]
-# define ZERO_FLAG (pf->flag)[3]
-# define HASH_FLAG (pf->flag)[4]
-
-# define L_MOD (pf->modifier)[0]
-# define LL_MOD (pf->modifier)[1]
-# define H_MOD (pf->modifier)[2]
-# define HH_MOD (pf->modifier)[3]
-# define CAP_L_MOD (pf->modifier)[4]
-# define J_MOD (pf->modifier)[5]
-# define Z_MOD (pf->modifier)[6]
 
 # define ANSI_RED "\e[0;31m"
 # define ANSI_BOLD_RED "\e[1;31m"
