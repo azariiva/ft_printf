@@ -36,9 +36,7 @@ void	cast_decimal(t_pf *pf, va_list valist)
 
 void	cast_txt(t_pf *pf, va_list valist)
 {
-	if (pf->data_type == 'S' || (pf->data_type == 's' && (pf->modifier & L_MOD)))
-		va_arg(valist, wchar_t*);
-	else if (pf->data_type == 's')
+	if (pf->data_type == 's')
 		va_arg(valist, char*);
 	if (pf->data_type == 'C' || (pf->data_type == 'c' && (pf->modifier & L_MOD)))
 		va_arg(valist, char*);
