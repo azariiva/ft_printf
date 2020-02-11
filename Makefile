@@ -24,7 +24,7 @@ FT_PRINTF_SLIB = $(NAME)
 FT_PRINTF_SRC = ft_printf parse parse_utils \
 			 	print print_num print_txt \
 				print_base print_decimal \
-				print_utils print_utils2 colors cast
+				print_utils print_utils2 colors
 
 # object files
 FT_PRINTF_O_FILES =  $(patsubst %, $(OBJ)/%.o, $(FT_PRINTF_SRC))
