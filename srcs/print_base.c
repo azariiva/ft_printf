@@ -33,7 +33,7 @@ void	print_zero_flag_ull(t_pf *pf, int *diff, char *tmp)
 {
 	if (tmp[0] == '-')
 	{
-		write(1, "-", 1);
+		ft_putchar('-');
 		tmp++;
 	}
 	else

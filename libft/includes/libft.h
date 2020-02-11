@@ -6,7 +6,7 @@
 /*   By: blinnea <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 16:09:17 by blinnea           #+#    #+#             */
-/*   Updated: 2019/09/21 12:33:55 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/02/11 19:39:20 by fhilary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-# define ISWHITESPACE(a) ((a) == ' ' || (a) == '\n' || (a) == '\t')
 
 typedef struct	s_list
 {
@@ -125,8 +123,10 @@ void			ft_putcharn(char c, size_t n);
 ** ft_pritnf
 */
 char			*ft_cap_lftoa(long double n, int precision);
-int				ft_cap_lftoa_rounding(long double f_part_c, int precision, long double *f_part, long long *i_part);
-void			ft_cap_lftoa_add_number(int *i, char **result, long double *f_part);
+int				ft_cap_lftoa_rounding(long double f_part_c, int precision, \
+		long double *f_part, long long *i_part);
+void			ft_cap_lftoa_add_number(int *i, char **result, \
+		long double *f_part);
 void			ft_cap_lftoa_set_other_nums(int i, char **result);
 void			ft_strup(char *tmp);
 
