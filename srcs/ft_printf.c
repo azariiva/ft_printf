@@ -71,12 +71,8 @@ int		ft_printf(const char *format, ...)
 	va_copy(va_2, va);
 	pf->valist = &va;
 	pf->format = (char*)format;
-	pf->modifier |= L_MOD;
-	if (pf->modifier & L_MOD)
-	{
 	if (loop_format(pf, va_2))
 		return (-1);
-	}
 	va_end(va);
 	va_end(va_2);
 	length = pf->len;
