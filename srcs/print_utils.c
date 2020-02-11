@@ -19,31 +19,12 @@ void	print_padding_add_len(char c, int *diff, t_pf *pf)
 	*diff = 0;
 }
 
-void	ft_putchar_add_len(char c, t_pf *pf)
-{
-	write(1, &c, 1);
-	pf->len++;
-}
-
-void	ft_putstr_add_len(char *str, t_pf *pf)
-{
-	int	i;
-
-	i = 0;
-	pf->len += ft_strlen(str);
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-}
-
 void	print_plus_space_flag(t_pf *pf, char *num)
 {
 	if ((pf->flag & PLUS_FLAG) && num[0] != '-')
-		ft_putchar_add_len('+', pf);
+		pf->len += ft_putchar('+');
 	if ((pf->flag & SPACE_FLAG) && num[0] != '-')
-		ft_putchar_add_len(' ', pf);
+		pf->len += ft_putchar(' ');
 }
 
 void	ft_putstrn_add_len(char const *s, size_t n, t_pf *pf)
