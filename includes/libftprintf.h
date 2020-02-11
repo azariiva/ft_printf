@@ -202,7 +202,6 @@ size_t			check_3byte_utf8(unsigned char *str, size_t len, size_t *i,
 																bool *checked);
 size_t			check_4byte_utf8(unsigned char *str, size_t len, size_t *i,
 																bool *checked);
-int				validate_next(t_pf *pf, char *format, va_list valist_cpy);
 
 /*
 **		>>>>>>>>	CASTING_FUNCTIONS		<<<<<<<<

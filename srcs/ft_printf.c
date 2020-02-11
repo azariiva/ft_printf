@@ -37,20 +37,14 @@ int		loop_format(t_pf *pf, va_list va_2)
 
 	i = 0;
 	reset_pf(pf);
-	if (!(validate_next(pf, ft_strdup(pf->format), va_2)))
-		return (1);
-	while ((pf->format)[i])
+	while ((pf->format)[i] && va_2)
 	{
 		if ((pf->format)[i] == '{')
 			print_color(pf, pf->format, &i);
 		if ((pf->format)[i] != '%')
 			ft_putchar_add_len((pf->format)[i], pf);
 		if ((pf->format)[i] == '%')
-		{
 			if_conversion(pf, &i);
-			if (!(validate_next(pf, ft_strdup(&((pf->format)[i + 1])), va_2)))
-				return (1);
-		}
 		if ((pf->format)[i])
 			i++;
 	}
