@@ -21,21 +21,7 @@ void	print_padding_add_len(char c, int *diff, t_pf *pf)
 
 void	ft_putchar_add_len(char c, t_pf *pf)
 {
-	write(1, &c, 1);
-	pf->len++;
-}
-
-void	ft_putstr_add_len(char *str, t_pf *pf)
-{
-	int	i;
-
-	i = 0;
-	pf->len += ft_strlen(str);
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
+	pf->len += ft_putchar(c);
 }
 
 void	print_plus_space_flag(t_pf *pf, char *num)

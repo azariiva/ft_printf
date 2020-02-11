@@ -182,7 +182,6 @@ void			print_zero_flag_ull(t_pf *pf, int *diff, char *tmp);
 int				calc_diff(t_pf *pf, char *num);
 int				set_init_diff(t_pf *pf, char *num);
 void			ft_putchar_add_len(char c, t_pf *pf);
-void			ft_putstr_add_len(char *str, t_pf *pf);
 void			print_plus_space_flag(t_pf *pf, char *num);
 void			print_padding_add_len(char c, int *diff, t_pf *pf);
 void			print_zero_flag_num(t_pf *pf, int *diff, char *tmp);

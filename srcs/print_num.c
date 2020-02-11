@@ -61,7 +61,7 @@ void	print_zero_flag_num(t_pf *pf, int *diff, char *tmp)
 		(*diff)--;
 	}
 	print_precision(pf, tmp);
-	ft_putstr_add_len(tmp, pf);
+	pf->len += ft_putstr(tmp);
 }
 
 void	print_no_zero_flag_num(t_pf *pf, int *diff, char *tmp)
@@ -73,12 +73,12 @@ void	print_no_zero_flag_num(t_pf *pf, int *diff, char *tmp)
 	{
 		ft_putchar_add_len('-', pf);
 		print_precision(pf, tmp);
-		ft_putstr_add_len(&tmp[1], pf);
+		pf->len += ft_putstr(tmp + 1);
 	}
 	else
 	{
 		print_precision(pf, tmp);
-		ft_putstr_add_len(tmp, pf);
+		pf->len += ft_putstr(tmp);
 	}
 	print_padding_add_len(' ', diff, pf);
 }
