@@ -186,18 +186,6 @@ void			print_padding_add_len(char c, int *diff, t_pf *pf);
 void			print_zero_flag_num(t_pf *pf, int *diff, char *tmp);
 void			print_zero_flag_space_plus_flag(t_pf *pf, char **tmp);
 void			ft_putstrn_add_len(char const *s, size_t n, t_pf *pf);
-
-/*
-**		>>>>>>>>	VALIDATE_FUNCTIONS		<<<<<<<<
-*/
-size_t			is_utf8(unsigned char *str, size_t len);
-size_t			check_2byte_utf8(unsigned char *str, size_t len, size_t *i,
-																bool *checked);
-size_t			check_3byte_utf8(unsigned char *str, size_t len, size_t *i,
-																bool *checked);
-size_t			check_4byte_utf8(unsigned char *str, size_t len, size_t *i,
-																bool *checked);
-
 /*
 **		>>>>>>>>	CASTING_FUNCTIONS		<<<<<<<<
 */

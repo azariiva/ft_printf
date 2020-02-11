@@ -22,8 +22,7 @@ FT_PRINTF_SLIB = $(NAME)
 
 # function names
 FT_PRINTF_SRC = ft_printf parse parse_utils \
-				utils print print_num is_utf8 \
-				is_utf8_3b is_utf8_4b print_txt \
+				utils print print_num print_txt \
 				print_base print_decimal \
 				print_utils print_utils2 colors cast
 
