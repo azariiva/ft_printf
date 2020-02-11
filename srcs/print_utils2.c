@@ -60,8 +60,7 @@ void	print_precision(t_pf *pf, char *num)
 	{
 		while (pf->precision > 0 && pf->precision > (int)ft_strlen(&num[1]))
 		{
-			write(1, "0", 1);
-			pf->len++;
+			pf->len += ft_putchar('0');
 			pf->precision--;
 		}
 	}
@@ -69,8 +68,7 @@ void	print_precision(t_pf *pf, char *num)
 	{
 		while (pf->precision > 0 && pf->precision > (int)ft_strlen(num))
 		{
-			write(1, "0", 1);
-			pf->len++;
+			pf->len += ft_putchar('0');
 			pf->precision--;
 		}
 	}

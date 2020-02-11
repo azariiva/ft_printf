@@ -26,17 +26,3 @@ void	print_plus_space_flag(t_pf *pf, char *num)
 	if ((pf->flag & SPACE_FLAG) && num[0] != '-')
 		pf->len += ft_putchar(' ');
 }
-
-void	ft_putstrn_add_len(char const *s, size_t n, t_pf *pf)
-{
-	int index;
-
-	index = 0;
-	while (s[index] && n)
-	{
-		write(1, &s[index], 1);
-		pf->len++;
-		index++;
-		n--;
-	}
-}

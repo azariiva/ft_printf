@@ -59,10 +59,9 @@ void	add_dot(char **tmp)
 {
 	char	*tmp2;
 
-	tmp2 = ft_strdup(*tmp);
+	tmp2 = ft_strjoin(*tmp, ".");
 	free(*tmp);
-	*tmp = ft_strjoin(tmp2, ".");
-	free(tmp2);
+	*tmp = tmp2;
 }
 
 int		print_num_f(t_pf *pf, long double num)
@@ -80,9 +79,9 @@ int		print_num_f(t_pf *pf, long double num)
 		free(tmp);
 		return (1);
 	}
-	if (!(is_neg_zero(pf, num, &tmp)))
+	if (!is_neg_zero(pf, num, &tmp))
 		tmp = ft_cap_lftoa(num, pf->precision);
-	if (!(ft_strchr(tmp, '.')) && (pf->flag & HASH_FLAG))
+	if (ft_strchr(tmp, '.') && pf->flag & HASH_FLAG)
 		add_dot(&tmp);
 	if (!tmp)
 		return (-1);

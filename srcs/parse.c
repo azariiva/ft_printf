@@ -27,11 +27,11 @@ void	set_flag(t_pf *pf, char c, int *i)
 	(*i)++;
 }
 
-void	set_width(t_pf *pf, char *str, int *i, va_list valist)
+void	set_width(t_pf *pf, char *fmt, int *i, va_list valist)
 {
 	long	w;
 
-	if (str[*i] == '*')
+	if (fmt[*i] == '*')
 	{
 		w = (long)va_arg(valist, int);
 		if (w < 0)
@@ -44,18 +44,18 @@ void	set_width(t_pf *pf, char *str, int *i, va_list valist)
 	}
 	else
 	{
-		pf->width = ft_atoi(&str[*i]);
-		while (str[*i] >= '0' && str[*i] <= '9')
+		pf->width = ft_atoi(&fmt[*i]);
+		while (fmt[*i] >= '0' && fmt[*i] <= '9')
 			(*i)++;
 	}
 }
 
-void	set_precision(t_pf *pf, char *str, int *i, va_list valist)
+void	set_precision(t_pf *pf, char *fmt, int *i, va_list valist)
 {
 	long	w;
 
 	(*i)++;
-	if (str[*i] == '*')
+	if (fmt[*i] == '*')
 	{
 		w = (long)va_arg(valist, int);
 		if (w >= 0)
@@ -68,58 +68,58 @@ void	set_precision(t_pf *pf, char *str, int *i, va_list valist)
 	}
 	else
 	{
-		pf->precision = ft_atoi(&str[*i]);
+		pf->precision = ft_atoi(&fmt[*i]);
 		if (pf->precision <= 0)
 			pf->precision = -1;
 	}
-	while (str[*i] >= '0' && str[*i] <= '9')
+	while (fmt[*i] >= '0' && fmt[*i] <= '9')
 		(*i)++;
 }
 
-void	set_modifier(t_pf *pf, char *str, int *i)
+void	set_modifier(t_pf *pf, char *fmt, int *i)
 {
-	if (str[*i] == 'l')
+	if (fmt[*i] == 'l')
 	{
-		if (str[(*i) + 1] == 'l')
+		if (fmt[(*i) + 1] == 'l')
 			pf->modifier |= LL_MOD;
 		else
 			pf->modifier |= L_MOD;
 	}
-	if (str[*i] == 'h')
+	if (fmt[*i] == 'h')
 	{
-		if (str[(*i) + 1] == 'h')
+		if (fmt[(*i) + 1] == 'h')
 			pf->modifier |= HH_MOD;
 		else
 			pf->modifier |= H_MOD;
 	}
-	if (str[*i] == 'L')
+	if (fmt[*i] == 'L')
 		pf->modifier |= CAP_L_MOD;
-	if (str[*i] == 'j')
+	if (fmt[*i] == 'j')
 		pf->modifier |= J_MOD;
-	if (str[*i] == 'z')
+	if (fmt[*i] == 'z')
 		pf->modifier |= Z_MOD;
 	(*i)++;
 }
 
-void	parse_placeholder(t_pf *pf, char *str, int *i, va_list va)
+void	parse_placeholder(t_pf *pf, char *fmt, int *i, va_list va)
 {
 	(*i)++;
 	while (!(pf->data_type))
 	{
-		if (is_flag(str[*i]))
-			set_flag(pf, str[*i], i);
-		else if ((str[*i] >= '1' && str[*i] <= '9') || str[*i] == '*')
-			set_width(pf, str, i, va);
-		else if (str[*i] == '.')
-			set_precision(pf, str, i, va);
-		else if (is_modifier(str[*i]))
-			set_modifier(pf, str, i);
-		else if (is_data_type(str[*i]))
+		if (is_flag(fmt[*i]))
+			set_flag(pf, fmt[*i], i);
+		else if ((fmt[*i] >= '1' && fmt[*i] <= '9') || fmt[*i] == '*')
+			set_width(pf, fmt, i, va);
+		else if (fmt[*i] == '.')
+			set_precision(pf, fmt, i, va);
+		else if (is_modifier(fmt[*i]))
+			set_modifier(pf, fmt, i);
+		else if (is_data_type(fmt[*i]))
 		{
-			pf->data_type = str[*i];
+			pf->data_type = fmt[*i];
 			validate_flags(pf);
 		}
 		else
-			if_nothing(pf, str, i);
+			if_nothing(pf, fmt, i);
 	}
 }

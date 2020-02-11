@@ -57,7 +57,7 @@ void		print_color(t_pf *pf, char *format, int *i)
 	char	*ptr;
 	char	*color;
 
-	if ((ptr = strchr(format + *i, '}')))
+	if ((ptr = ft_strchr(format + *i, '}')))
 	{
 		color = ft_strsub(format, *i, (size_t)(ptr + 1 - *i - format));
 		if (check_color(pf, color))

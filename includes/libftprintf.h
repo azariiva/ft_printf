@@ -184,7 +184,6 @@ void			print_plus_space_flag(t_pf *pf, char *num);
 void			print_padding_add_len(char c, int *diff, t_pf *pf);
 void			print_zero_flag_num(t_pf *pf, int *diff, char *tmp);
 void			print_zero_flag_space_plus_flag(t_pf *pf, char **tmp);
-void			ft_putstrn_add_len(char const *s, size_t n, t_pf *pf);
 /*
 **		>>>>>>>>	CASTING_FUNCTIONS		<<<<<<<<
 */

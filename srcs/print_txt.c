@@ -55,7 +55,7 @@ void	print_txt_s(t_pf *pf, char *str)
 	if (pf->precision != -1)
 	{
 		if (pf->precision > 0)
-			ft_putstrn_add_len(str, pf->precision, pf);
+			pf->len += ft_putstrn(str, pf->precision);
 		else
 			pf->len += ft_putstr(str);
 	}
