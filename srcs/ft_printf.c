@@ -59,7 +59,12 @@ int		ft_printf(const char *format, ...)
 
 	if (!format)
 		return (-1);
-	pf = create_pf_struct();
+
+	if ((pf = (t_pf*)malloc(sizeof(t_pf))) == NULL)
+		display_error("Out of memory");
+	ft_bzero(pf, sizeof(t_pf));
+	pf->data_type = 1;
+
 	va_start(va, format);
 	pf->valist = &va;
 	pf->format = (char*)format;

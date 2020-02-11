@@ -17,15 +17,3 @@ void	display_error(char *str)
 	ft_putendl(str);
 	exit(EXIT_FAILURE);
 }
-
-t_pf	*create_pf_struct(void)
-{
-	t_pf	*pf;
-
-	pf = (t_pf*)malloc(sizeof(t_pf));
-	if (pf == NULL)
-		display_error("Out of memory");
-	ft_bzero(pf, sizeof(t_pf));
-	pf->data_type = 1;
-	return (pf);
-}
