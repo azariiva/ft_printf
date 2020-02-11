@@ -42,7 +42,7 @@ int		loop_format(t_pf *pf)
 		if ((pf->format)[i] == '{')
 			print_color(pf, pf->format, &i);
 		if ((pf->format)[i] != '%')
-			ft_putchar_add_len((pf->format)[i], pf);
+			pf->len += ft_putchar((pf->format)[i]);
 		if ((pf->format)[i] == '%')
 			if_conversion(pf, &i);
 		if ((pf->format)[i])
