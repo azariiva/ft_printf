@@ -3,6 +3,6 @@
 
 int main(void)
 {
-    ft_printf("{red}%ld{eoc}", 2147483648);
+    ft_printf("{red}%ld{eocd}", 2147483648);
     return (0);
 }

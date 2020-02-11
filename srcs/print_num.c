@@ -83,7 +83,7 @@ void	print_no_zero_flag_num(t_pf *pf, int *diff, char *tmp)
 	print_padding_add_len(' ', diff, pf);
 }
 
-void	print_num_d(t_pf *pf, long long num)
+int		print_num_d(t_pf *pf, long long num)
 {
 	int		diff;
 	char	*tmp;
@@ -91,15 +91,16 @@ void	print_num_d(t_pf *pf, long long num)
 	if (!num && pf->precision == -1)
 	{
 		num_prec_zero(pf);
-		return ;
+		return 1;
 	}
 	tmp = ft_lltoa(num);
 	if (!tmp)
-		display_error("Out of memory");
+		return (-1);
 	diff = calc_diff(pf, tmp);
 	if (pf->flag & ZERO_FLAG)
 		print_zero_flag_num(pf, &diff, tmp);
 	else
 		print_no_zero_flag_num(pf, &diff, tmp);
 	free(tmp);
+	return (0);
 }

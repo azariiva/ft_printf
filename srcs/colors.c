@@ -54,16 +54,14 @@ static int	check_color(t_pf *pf, char *color)
 
 void		print_color(t_pf *pf, char *format, int *i)
 {
-	int		i2;
+	char	*ptr;
 	char	*color;
 
-	i2 = *i;
-	while (format[i2] && format[i2] != '}')
-		i2++;
-	if (format[i2] == '}')
+	if ((ptr = strchr(format + *i, '}')))
 	{
-		color = ft_strsub(format, *i, (size_t)(i2 + 1 - *i));
+		color = ft_strsub(format, *i, (size_t)(ptr + 1 - *i - format));
 		if (check_color(pf, color))
-			*i = i2 + 1;
+			*i = ptr - format + 1;
+		free(color);
 	}
 }

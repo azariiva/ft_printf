@@ -33,7 +33,7 @@ int		is_inf(long double n, char **tmp)
 		ret_1 = true;
 	}
 	if (ret_1 == true && !(*tmp))
-		display_error("Out of memory");
+		return (-1);
 	if (ret_1 == true)
 		return (1);
 	return (0);
@@ -47,7 +47,7 @@ int		is_neg_zero(t_pf *pf, long double n, char **tmp)
 	{
 		tmp_2 = ft_cap_lftoa(n, pf->precision);
 		if (!tmp_2)
-			display_error("Out of memory");
+			return (-1);
 		*tmp = ft_strjoin("-", tmp_2);
 		free(tmp_2);
 		return (1);
@@ -65,7 +65,7 @@ void	add_dot(char **tmp)
 	free(tmp2);
 }
 
-void	print_num_f(t_pf *pf, long double num)
+int		print_num_f(t_pf *pf, long double num)
 {
 	int		diff;
 	char	*tmp;
@@ -78,18 +78,19 @@ void	print_num_f(t_pf *pf, long double num)
 		pf->precision = 0;
 		print_txt_s(pf, tmp);
 		free(tmp);
-		return ;
+		return (1);
 	}
 	if (!(is_neg_zero(pf, num, &tmp)))
 		tmp = ft_cap_lftoa(num, pf->precision);
 	if (!(ft_strchr(tmp, '.')) && (pf->flag & HASH_FLAG))
 		add_dot(&tmp);
 	if (!tmp)
-		display_error("Out of memory");
+		return (-1);
 	diff = calc_diff(pf, tmp);
 	if (pf->flag & ZERO_FLAG)
 		print_zero_flag_num(pf, &diff, tmp);
 	else
 		print_no_zero_flag_num(pf, &diff, tmp);
 	free(tmp);
+	return (0);
 }

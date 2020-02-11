@@ -61,7 +61,7 @@ int		ft_printf(const char *format, ...)
 		return (-1);
 
 	if ((pf = (t_pf*)malloc(sizeof(t_pf))) == NULL)
-		display_error("Out of memory");
+		return (-1);
 	ft_bzero(pf, sizeof(t_pf));
 	pf->data_type = 1;
 

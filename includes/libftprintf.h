@@ -148,7 +148,6 @@ void			if_nothing(t_pf *pf, char *str, int *i);
 /*
 **		>>>>>>>>	UTIL_FUNCTIONS		<<<<<<<<
 */
-void			display_error(char *str);
 t_pf			*create_pf_struct(void);
 void			print_padding_add_len(char c, int *diff, t_pf *pf);
 
@@ -162,8 +161,8 @@ void			print_padding(t_pf *pf, int *diff);
 
 void			print_placeholder(t_pf *pf);
 void			print_num(t_pf *pf);
-void			print_num_d(t_pf *pf, long long num);
-void			print_num_f(t_pf *pf, long double num);
+int				print_num_d(t_pf *pf, long long num);
+int				print_num_f(t_pf *pf, long double num);
 void			print_txt(t_pf *pf);
 void			print_base(t_pf *pf);
 
@@ -171,7 +170,7 @@ void			print_txt_c(t_pf *pf, char c);
 void			print_txt_s(t_pf *pf, char *str);
 void			print_padding(t_pf *pf, int *diff);
 
-void			print_b(t_pf *pf, unsigned long long num, int base);
+int				print_b(t_pf *pf, unsigned long long num, int base);
 void			print_0x(t_pf *pf, char *tmp);
 void			print_ull(t_pf *pf, int *diff, char *tmp);
 void			print_zero_flag_ull(t_pf *pf, int *diff, char *tmp);

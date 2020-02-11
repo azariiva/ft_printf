@@ -54,7 +54,7 @@ void	print_ull(t_pf *pf, int *diff, char *tmp)
 	print_padding_add_len(' ', diff, pf);
 }
 
-void	print_b(t_pf *pf, unsigned long long num, int base)
+int		print_b(t_pf *pf, unsigned long long num, int base)
 {
 	int		diff;
 	char	*tmp;
@@ -66,10 +66,10 @@ void	print_b(t_pf *pf, unsigned long long num, int base)
 			pf->len += ft_putstr("0x");
 		pf->len += pf->width;
 		ft_putcharn(' ', pf->width);
-		return ;
+		return (1);
 	}
 	if (!(tmp = ft_ulltoa_base(num, base)))
-		display_error("Out of memory");
+		return (-1);
 	if (pf->data_type == 'X')
 		ft_strup(tmp);
 	diff = calc_diff(pf, tmp);
@@ -78,4 +78,5 @@ void	print_b(t_pf *pf, unsigned long long num, int base)
 	else
 		print_ull(pf, &diff, tmp);
 	free(tmp);
+	return (0);
 }
