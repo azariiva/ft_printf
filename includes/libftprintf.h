@@ -125,7 +125,7 @@ typedef struct	s_pf
 void			reset_pf(t_pf *pf);
 void			if_conversion(t_pf *pf, int *i);
 int				ft_printf(const char *format, ...);
-int				loop_format(t_pf *pf, va_list va_2);
+int				loop_format(t_pf *pf);
 
 /*
 **		>>>>>>>>	PARSING_FUNCTIONS	<<<<<<<<
@@ -150,7 +150,6 @@ void			if_nothing(t_pf *pf, char *str, int *i);
 */
 void			display_error(char *str);
 t_pf			*create_pf_struct(void);
-void			change_to_upper(char *tmp);
 void			print_padding_add_len(char c, int *diff, t_pf *pf);
 
 /*

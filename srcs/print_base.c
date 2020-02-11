@@ -72,7 +72,7 @@ void	print_b(t_pf *pf, unsigned long long num, int base)
 	if (!tmp)
 		display_error("Out of memory");
 	if (pf->data_type == 'X')
-		change_to_upper(tmp);
+		ft_strup(tmp);
 	diff = calc_diff(pf, tmp);
 	if (pf->flag & ZERO_FLAG)
 		print_zero_flag_ull(pf, &diff, tmp);

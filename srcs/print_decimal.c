@@ -73,7 +73,7 @@ void	print_num_f(t_pf *pf, long double num)
 	if (is_inf(num, &tmp))
 	{
 		if (pf->data_type == 'F')
-			change_to_upper(tmp);
+			ft_strup(tmp);
 		pf->flag &= ~ZERO_FLAG;
 		pf->precision = 0;
 		print_txt_s(pf, tmp);

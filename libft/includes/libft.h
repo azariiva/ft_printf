@@ -128,5 +128,6 @@ char			*ft_cap_lftoa(long double n, int precision);
 int				ft_cap_lftoa_rounding(long double f_part_c, int precision, long double *f_part, long long *i_part);
 void			ft_cap_lftoa_add_number(int *i, char **result, long double *f_part);
 void			ft_cap_lftoa_set_other_nums(int i, char **result);
+void			ft_strup(char *tmp);
 
 #endif

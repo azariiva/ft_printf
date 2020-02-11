@@ -29,16 +29,3 @@ t_pf	*create_pf_struct(void)
 	pf->data_type = 1;
 	return (pf);
 }
-
-void	change_to_upper(char *tmp)
-{
-	int	i;
-
-	i = 0;
-	while (tmp[i])
-	{
-		if (tmp[i] >= 'a' && tmp[i] <= 'z')
-			tmp[i] -= 32;
-		i++;
-	}
-}

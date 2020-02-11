@@ -31,13 +31,13 @@ void	if_conversion(t_pf *pf, int *i)
 	reset_pf(pf);
 }
 
-int		loop_format(t_pf *pf, va_list va_2)
+int		loop_format(t_pf *pf)
 {
 	int	i;
 
 	i = 0;
 	reset_pf(pf);
-	while ((pf->format)[i] && va_2)
+	while ((pf->format)[i])
 	{
 		if ((pf->format)[i] == '{')
 			print_color(pf, pf->format, &i);
@@ -56,19 +56,16 @@ int		ft_printf(const char *format, ...)
 	int		length;
 	t_pf	*pf;
 	va_list	va;
-	va_list	va_2;
 
 	if (!format)
 		return (-1);
 	pf = create_pf_struct();
 	va_start(va, format);
-	va_copy(va_2, va);
 	pf->valist = &va;
 	pf->format = (char*)format;
-	if (loop_format(pf, va_2))
+	if (loop_format(pf))
 		return (-1);
 	va_end(va);
-	va_end(va_2);
 	length = pf->len;
 	free(pf);
 	
