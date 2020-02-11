@@ -117,10 +117,6 @@ void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstadd(t_list **alst, t_list *new);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-long long		ft_llabs(long long n);
-char			*ft_ulltoa_base(unsigned long long value, int base);
-char			*ft_lltoa(long long n);
-void			ft_putcharn(char c, size_t n);
 /*
 ** ft_pritnf
 */
@@ -129,5 +125,9 @@ int				ft_cap_lftoa_rounding(long double f_part_c, int precision, long double *f
 void			ft_cap_lftoa_add_number(int *i, char **result, long double *f_part);
 void			ft_cap_lftoa_set_other_nums(int i, char **result);
 void			ft_strup(char *tmp);
+long long		ft_llabs(long long n);
+char			*ft_ulltoa_base(unsigned long long value, int base);
+char			*ft_lltoa(long long n);
+void			ft_putcharn(char c, size_t n);
 
 #endif

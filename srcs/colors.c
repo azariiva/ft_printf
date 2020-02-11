@@ -12,95 +12,44 @@
 
 #include "libftprintf.h"
 
-static int	more_bold(t_pf *pf, char *color)
-{
-	if (ft_strequ(color, "{bold blue}"))
-	{
-		pf->len += ft_putstr(ANSI_BOLD_BLUE);
-		return (1);
-	}
-	else if (ft_strequ(color, "{bold magenta}"))
-	{
-		pf->len += ft_putstr(ANSI_BOLD_MAGENTA);
-		return (1);
-	}
-	else if (ft_strequ(color, "{bold cyan}"))
-	{
-		pf->len += ft_putstr(ANSI_BOLD_CYAN);
-		return (1);
-	}
-	return (0);
-}
-
 static int	bold_colors(t_pf *pf, char *color)
 {
 	if (ft_strequ(color, "{bold red}"))
-	{
 		pf->len += ft_putstr(ANSI_BOLD_RED);
-		return (1);
-	}
 	else if (ft_strequ(color, "{bold green}"))
-	{
 		pf->len += ft_putstr(ANSI_BOLD_GREEN);
-		return (1);
-	}
 	else if (ft_strequ(color, "{bold yellow}"))
-	{
 		pf->len += ft_putstr(ANSI_BOLD_YELLOW);
-		return (1);
-	}
-	else if (more_bold(pf, color))
-		return (1);
-	return (0);
-}
-
-static int	more_colors(t_pf *pf, char *color)
-{
-	if (ft_strequ(color, "{blue}"))
-	{
-		pf->len += ft_putstr(ANSI_BLUE);
-		return (1);
-	}
-	else if (ft_strequ(color, "{magenta}"))
-	{
-		pf->len += ft_putstr(ANSI_MAGENTA);
-		return (1);
-	}
-	else if (ft_strequ(color, "{cyan}"))
-	{
-		pf->len += ft_putstr(ANSI_CYAN);
-		return (1);
-	}
-	else if (ft_strequ(color, "{eoc}"))
-	{
-		pf->len += ft_putstr(ANSI_EOC);
-		return (1);
-	}
-	return (0);
+	else if (ft_strequ(color, "{bold blue}"))
+		pf->len += ft_putstr(ANSI_BOLD_BLUE);
+	else if (ft_strequ(color, "{bold magenta}"))
+		pf->len += ft_putstr(ANSI_BOLD_MAGENTA);
+	else if (ft_strequ(color, "{bold cyan}"))
+		pf->len += ft_putstr(ANSI_BOLD_CYAN);
+	else
+		return (0);
+	return (1);
 }
 
 static int	check_color(t_pf *pf, char *color)
 {
 	if (ft_strequ(color, "{red}"))
-	{
 		pf->len += ft_putstr(ANSI_RED);
-		return (1);
-	}
 	else if (ft_strequ(color, "{green}"))
-	{
 		pf->len += ft_putstr(ANSI_GREEN);
-		return (1);
-	}
 	else if (ft_strequ(color, "{yellow}"))
-	{
 		pf->len += ft_putstr(ANSI_YELLOW);
-		return (1);
-	}
-	else if (more_colors(pf, color))
-		return (1);
-	else if (bold_colors(pf, color))
-		return (1);
-	return (0);
+	else if (ft_strequ(color, "{blue}"))
+		pf->len += ft_putstr(ANSI_BLUE);
+	else if (ft_strequ(color, "{magenta}"))
+		pf->len += ft_putstr(ANSI_MAGENTA);
+	else if (ft_strequ(color, "{cyan}"))
+		pf->len += ft_putstr(ANSI_CYAN);
+	else if (ft_strequ(color, "{eoc}"))
+		pf->len += ft_putstr(ANSI_EOC);
+	else if (!bold_colors(pf, color))
+		return (0);
+	return (1);
 }
 
 void		print_color(t_pf *pf, char *format, int *i)
