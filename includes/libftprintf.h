@@ -38,6 +38,18 @@ typedef enum	e_typefg
 	SPACE_FLAG = 1 << 2,
 	ZERO_FLAG = 1 << 3,
 	HASH_FLAG = 1 << 4,
+	C_FLAG = 1 << 5,
+	S_FLAG = 1 << 6,
+	P_FLAG = 1 << 7,
+	D_FLAG = 1 << 8,
+	I_FLAG = 1 << 9,
+	O_FLAG = 1 << 10,
+	U_FLAG = 1 << 11,
+	X_FLAG = 1 << 12,
+	X_CAP_FLAG = 1 << 13,
+	F_FLAG = 1 << 14,
+	PREC_FLAG = 1 << 15,
+	NOTHING_FLAG = 1 << 16,
 }				t_typefg;
 
 typedef struct	s_pf
@@ -132,7 +144,7 @@ void			parse_placeholder(t_pf *pf, const char *fmt, va_list va, int *i);
 */
 int				is_flag(char c);
 int				is_modifier(char c);
-int				is_data_type(char c);
+int				is_data_type(char c, t_pf *pf);
 void			validate_flags(t_pf *pf);
 void			if_nothing(t_pf *pf, const char *fmt, int *i);
 
