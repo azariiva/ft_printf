@@ -12,7 +12,7 @@
 
 #include "libftprintf.h"
 
-void	num_prec_zero(t_pf *pf)
+void		num_prec_zero(t_pf *pf)
 {
 	if ((pf->flag & PLUS_FLAG) || (pf->flag & SPACE_FLAG))
 		pf->width--;
@@ -29,7 +29,7 @@ void	num_prec_zero(t_pf *pf)
 		ft_putcharn_buf(&(pf->buf), ' ', pf->width);
 }
 
-void	print_zero_flag_space_plus_flag(t_pf *pf, char **tmp)
+static void	print_zero_flag_space_plus_flag(t_pf *pf, char **tmp)
 {
 	if ((*tmp)[0] == '-')
 	{
@@ -42,7 +42,7 @@ void	print_zero_flag_space_plus_flag(t_pf *pf, char **tmp)
 		pf->len += ft_putchar_buf(&(pf->buf), ' ');
 }
 
-void	print_zero_flag_num(t_pf *pf, int diff, char *tmp)
+void		print_zero_flag_num(t_pf *pf, int diff, char *tmp)
 {
 	if (tmp[0] == '-')
 		pf->width--;
@@ -60,7 +60,7 @@ void	print_zero_flag_num(t_pf *pf, int diff, char *tmp)
 	pf->len += ft_putstr_buf(&(pf->buf), tmp);
 }
 
-void	print_no_zero_flag_num(t_pf *pf, int diff, char *tmp)
+void		print_no_zero_flag_num(t_pf *pf, int diff, char *tmp)
 {
 	if (!(pf->flag & MIN_FLAG))
 	{
@@ -82,7 +82,7 @@ void	print_no_zero_flag_num(t_pf *pf, int diff, char *tmp)
 	pf->len += ft_putcharn_buf(&(pf->buf), ' ', diff);
 }
 
-int		print_num_d(t_pf *pf, long long num)
+int			print_num_d(t_pf *pf, long long num)
 {
 	int		diff;
 	char	*tmp;

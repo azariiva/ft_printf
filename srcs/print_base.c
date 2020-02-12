@@ -12,7 +12,7 @@
 
 #include "libftprintf.h"
 
-void	print_0x(t_pf *pf, char *tmp)
+static void	print_0x(t_pf *pf, char *tmp)
 {
 	if (pf->data_type == 'p')
 		pf->len += ft_putstr_buf(&(pf->buf), "0x");
@@ -29,7 +29,7 @@ void	print_0x(t_pf *pf, char *tmp)
 	}
 }
 
-void	print_zero_flag_ull(t_pf *pf, int *diff, char *tmp)
+static void	print_zero_flag_ull(t_pf *pf, int *diff, char *tmp)
 {
 	if (tmp[0] == '-')
 	{
@@ -45,7 +45,7 @@ void	print_zero_flag_ull(t_pf *pf, int *diff, char *tmp)
 	pf->len += ft_putstr_buf(&(pf->buf), tmp);
 }
 
-void	print_ull(t_pf *pf, int *diff, char *tmp)
+static void	print_ull(t_pf *pf, int *diff, char *tmp)
 {
 	if (!(pf->flag & MIN_FLAG))
 	{
@@ -59,7 +59,7 @@ void	print_ull(t_pf *pf, int *diff, char *tmp)
 	*diff = 0;
 }
 
-int		print_b(t_pf *pf, unsigned long long num, int base)
+int			print_b(t_pf *pf, unsigned long long num, int base)
 {
 	int		diff;
 	char	*tmp;

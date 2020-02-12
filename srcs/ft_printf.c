@@ -15,9 +15,9 @@
 static void	if_conversion(t_pf *pf, const char *fmt, va_list va, int *i)
 {
 	parse_placeholder(pf, fmt, va, i);
-	if ((pf->data_type) > 0)
+	if (pf->data_type > 0)
 		print_placeholder(pf, va);
-	if ((pf->data_type) == -1 && fmt[*i])
+	if (pf->data_type == -1 && fmt[*i])
 		print_txt_c(pf, fmt[*i]);
 	pf->flag = 0;
 	pf->width = 0;
