@@ -48,9 +48,9 @@ void	print_zero_flag_num(t_pf *pf, int diff, char *tmp)
 		pf->width--;
 	if (((pf->flag & PLUS_FLAG) || (pf->flag & SPACE_FLAG)) && tmp[0] != '-')
 		diff--;
-	if (pf->precision == -1 && pf->data_type != 'f' && pf->data_type != 'F')
-		pf->precision = (int)ft_strlen(tmp);
-	while (pf->precision > 0 && pf->width-- > pf->precision
+	if (pf->prec == -1 && pf->data_type != 'f' && pf->data_type != 'F')
+		pf->prec = (int)ft_strlen(tmp);
+	while (pf->prec > 0 && pf->width-- > pf->prec
 			&& (pf->data_type != 'f' && pf->data_type != 'F') && diff-- > 0)
 		pf->len += ft_putchar_buf(&(pf->buf), ' ');
 	print_zero_flag_space_plus_flag(pf, &tmp);
@@ -87,7 +87,7 @@ int		print_num_d(t_pf *pf, long long num)
 	int		diff;
 	char	*tmp;
 
-	if (!num && pf->precision == -1)
+	if (!num && pf->prec == -1)
 	{
 		num_prec_zero(pf);
 		return (1);

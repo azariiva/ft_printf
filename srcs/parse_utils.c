@@ -55,7 +55,7 @@ void	validate_flags(t_pf *pf)
 		pf->flag &= ~SPACE_FLAG;
 	if ((pf->flag & MIN_FLAG) && (pf->flag & ZERO_FLAG))
 		pf->flag &= ~ZERO_FLAG;
-	if (pf->precision != 0 && (pf->flag & ZERO_FLAG)
+	if (pf->prec != 0 && (pf->flag & ZERO_FLAG)
 		&& (pf->data_type == 'd' || pf->data_type == 'i'
 		|| pf->data_type == 'o' || pf->data_type == 'O'
 		|| pf->data_type == 'u' || pf->data_type == 'U'

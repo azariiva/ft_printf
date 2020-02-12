@@ -58,17 +58,17 @@ void	set_precision(t_pf *pf, const char *fmt, va_list va, int *i)
 	{
 		if ((w = va_arg(va, int)) >= 0)
 		{
-			pf->precision = w;
-			if (pf->precision == 0)
-				pf->precision = -1;
+			pf->prec = w;
+			if (pf->prec == 0)
+				pf->prec = -1;
 		}
 		(*i)++;
 	}
 	else
 	{
-		pf->precision = ft_atoi(fmt + *i);
-		if (pf->precision <= 0)
-			pf->precision = -1;
+		pf->prec = ft_atoi(fmt + *i);
+		if (pf->prec <= 0)
+			pf->prec = -1;
 	}
 	while (ft_isdigit(fmt[*i]))
 		(*i)++;

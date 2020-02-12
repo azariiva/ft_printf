@@ -45,7 +45,7 @@ typedef struct	s_pf
 {
 	t_typefg	flag;
 	int			width;
-	int			precision;
+	int			prec;
 	t_typemod	mod;
 	char		data_type;
 	int			len;
@@ -152,7 +152,6 @@ void			print_no_zero_flag_num(t_pf *pf, int diff, char *tmp);
 void			print_precision(t_pf *pf, char *num);
 
 void			print_placeholder(t_pf *pf, va_list va);
-void			print_num(t_pf *pf, va_list va);
 int				print_num_d(t_pf *pf, long long num);
 int				print_num_f(t_pf *pf, long double num);
 void			print_txt(t_pf *pf, va_list va);
@@ -170,18 +169,8 @@ void			print_zero_flag_ull(t_pf *pf, int *diff, char *tmp);
 **		>>>>>>>>	PRINT_UTIL_FUNCTIONS	<<<<<<<<
 */
 int				calc_diff(t_pf *pf, char *num);
-int				set_init_diff(t_pf *pf, char *num);
 void			print_plus_space_flag(t_pf *pf, char *num);
 void			print_zero_flag_space_plus_flag(t_pf *pf, char **tmp);
-/*
-**		>>>>>>>>	CASTING_FUNCTIONS		<<<<<<<<
-*/
-void			cast_num(t_pf *pf, va_list valist);
-void			cast_txt(t_pf *pf, va_list valist);
-void			cast_base(t_pf *pf, va_list valist);
-void			cast_decimal(t_pf *pf, va_list valist);
-void			cast_placeholder(t_pf *pf, va_list valist);
-
 /*
 **		>>>>>>>>	COLOR_FUNCTIONS			<<<<<<<<
 */

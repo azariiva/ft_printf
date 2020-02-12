@@ -12,7 +12,7 @@
 
 #include "libftprintf.h"
 
-int		is_inf(long double n, char **tmp)
+static int	is_inf(long double n, char **tmp)
 {
 	bool	ret_1;
 
@@ -39,13 +39,13 @@ int		is_inf(long double n, char **tmp)
 	return (0);
 }
 
-int		is_neg_zero(t_pf *pf, long double n, char **tmp)
+static int	is_neg_zero(t_pf *pf, long double n, char **tmp)
 {
 	char	*tmp_2;
 
 	if (n == 0 && 1 / n < -FLT_MAX)
 	{
-		tmp_2 = ft_cap_lftoa(n, pf->precision);
+		tmp_2 = ft_cap_lftoa(n, pf->prec);
 		if (!tmp_2)
 			return (-1);
 		*tmp = ft_strjoin("-", tmp_2);
@@ -55,7 +55,7 @@ int		is_neg_zero(t_pf *pf, long double n, char **tmp)
 	return (0);
 }
 
-void	add_dot(char **tmp)
+static void	add_dot(char **tmp)
 {
 	char	*tmp2;
 
@@ -64,7 +64,7 @@ void	add_dot(char **tmp)
 	*tmp = tmp2;
 }
 
-int		print_num_f(t_pf *pf, long double num)
+int			print_num_f(t_pf *pf, long double num)
 {
 	int		diff;
 	char	*tmp;
@@ -74,13 +74,13 @@ int		print_num_f(t_pf *pf, long double num)
 		if (pf->data_type == 'F')
 			ft_strup(tmp);
 		pf->flag &= ~ZERO_FLAG;
-		pf->precision = 0;
+		pf->prec = 0;
 		print_txt_s(pf, tmp);
 		free(tmp);
 		return (1);
 	}
 	if (!is_neg_zero(pf, num, &tmp))
-		tmp = ft_cap_lftoa(num, pf->precision);
+		tmp = ft_cap_lftoa(num, pf->prec);
 	if (ft_strchr(tmp, '.') && pf->flag & HASH_FLAG)
 		add_dot(&tmp);
 	if (!tmp)

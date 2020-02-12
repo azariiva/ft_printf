@@ -24,7 +24,7 @@ void	print_0x(t_pf *pf, char *tmp)
 			pf->len += ft_putstr_buf(&(pf->buf), "0X");
 		else if ((pf->data_type == 'o'
 			|| pf->data_type == 'O')
-			&& (int)ft_strlen(tmp) >= pf->precision)
+			&& (int)ft_strlen(tmp) >= pf->prec)
 			pf->len += ft_putchar_buf(&(pf->buf), '0');
 	}
 }
@@ -64,7 +64,7 @@ int		print_b(t_pf *pf, unsigned long long num, int base)
 	int		diff;
 	char	*tmp;
 
-	if (!num && pf->precision == -1 && !((pf->flag & HASH_FLAG) && \
+	if (!num && pf->prec == -1 && !((pf->flag & HASH_FLAG) && \
 				(pf->data_type == 'o' || pf->data_type == 'O')))
 	{
 		if (pf->data_type == 'p')

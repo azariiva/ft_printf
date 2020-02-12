@@ -12,7 +12,7 @@
 
 #include "libftprintf.h"
 
-void	print_num(t_pf *pf, va_list va)
+static void	print_num(t_pf *pf, va_list va)
 {
 	long long	n;
 
@@ -29,12 +29,12 @@ void	print_num(t_pf *pf, va_list va)
 	print_num_d(pf, n);
 }
 
-void	print_decimal(t_pf *pf, va_list va)
+static void	print_decimal(t_pf *pf, va_list va)
 {
 	long double	n;
 
-	if (!(pf->precision))
-		pf->precision = 6;
+	if (!(pf->prec))
+		pf->prec = 6;
 	if (pf->mod & CAP_L_MOD)
 		n = va_arg(va, long double);
 	else if (pf->mod & L_MOD)
@@ -44,7 +44,7 @@ void	print_decimal(t_pf *pf, va_list va)
 	print_num_f(pf, n);
 }
 
-void	print_txt(t_pf *pf, va_list va)
+void		print_txt(t_pf *pf, va_list va)
 {
 	if (pf->data_type == 's')
 		print_txt_s(pf, va_arg(va, char*));
@@ -54,7 +54,7 @@ void	print_txt(t_pf *pf, va_list va)
 		print_txt_c(pf, '%');
 }
 
-void	print_base(t_pf *pf, va_list va)
+void		print_base(t_pf *pf, va_list va)
 {
 	int					base;
 	unsigned long long	n;
@@ -81,20 +81,20 @@ void	print_base(t_pf *pf, va_list va)
 	print_b(pf, n, base);
 }
 
-void	print_placeholder(t_pf *pf, va_list va)
+void		print_placeholder(t_pf *pf, va_list va)
 {
 	if (pf->data_type == 'd' || pf->data_type == 'D'
-	|| pf->data_type == 'i')
+			|| pf->data_type == 'i')
 		print_num(pf, va);
 	if (pf->data_type == 'f' || pf->data_type == 'F')
 		print_decimal(pf, va);
 	else if (pf->data_type == 'o' || pf->data_type == 'O'
-	|| pf->data_type == 'u' || pf->data_type == 'U'
-	|| pf->data_type == 'x' || pf->data_type == 'X'
-	|| pf->data_type == 'p')
+				|| pf->data_type == 'u' || pf->data_type == 'U'
+					|| pf->data_type == 'x' || pf->data_type == 'X'
+						|| pf->data_type == 'p')
 		print_base(pf, va);
 	else if (pf->data_type == 's' || pf->data_type == 'S'
-	|| pf->data_type == 'c' || pf->data_type == 'C'
-	|| pf->data_type == '%')
+				|| pf->data_type == 'c' || pf->data_type == 'C'
+					|| pf->data_type == '%')
 		print_txt(pf, va);
 }

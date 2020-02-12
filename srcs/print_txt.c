@@ -16,9 +16,9 @@ int		calc_diff_s(t_pf *pf, char *str)
 {
 	int	diff;
 
-	if (pf->precision > 0 && pf->precision < (int)ft_strlen(str))
-		diff = pf->width - pf->precision;
-	else if (pf->precision == -1)
+	if (pf->prec > 0 && pf->prec < (int)ft_strlen(str))
+		diff = pf->width - pf->prec;
+	else if (pf->prec == -1)
 		diff = pf->width;
 	else
 		diff = pf->width - ft_strlen(str);
@@ -46,9 +46,9 @@ void	print_txt_s(t_pf *pf, char *str)
 		ft_putcharn_buf(&(pf->buf), pf->flag & ZERO_FLAG ? '0' : ' ', diff);
 		diff = 0;
 	}
-	if (pf->precision != -1)
-		pf->len += (pf->precision > 0 ? ft_putstrn_buf(&(pf->buf), str, \
-					pf->precision) : ft_putstr_buf(&(pf->buf), str));
+	if (pf->prec != -1)
+		pf->len += (pf->prec > 0 ? ft_putstrn_buf(&(pf->buf), str, \
+					pf->prec) : ft_putstr_buf(&(pf->buf), str));
 	if (diff > 0)
 		ft_putcharn_buf(&(pf->buf), ' ', diff);
 	if (free_b == true)
