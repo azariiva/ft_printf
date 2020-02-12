@@ -147,10 +147,9 @@ t_pf			*create_pf_struct(void);
 /*
 **		>>>>>>>>	PRINTING_FUNCTIONS	<<<<<<<<
 */
-void			print_zero_flag_num(t_pf *pf, int *diff, char *tmp);
-void			print_no_zero_flag_num(t_pf *pf, int *diff, char *tmp);
+void			print_zero_flag_num(t_pf *pf, int diff, char *tmp);
+void			print_no_zero_flag_num(t_pf *pf, int diff, char *tmp);
 void			print_precision(t_pf *pf, char *num);
-void			print_padding(t_pf *pf, int *diff);
 
 void			print_placeholder(t_pf *pf, va_list va);
 void			print_num(t_pf *pf, va_list va);
@@ -161,7 +160,6 @@ void			print_base(t_pf *pf, va_list va);
 
 void			print_txt_c(t_pf *pf, char c);
 void			print_txt_s(t_pf *pf, char *str);
-void			print_padding(t_pf *pf, int *diff);
 
 int				print_b(t_pf *pf, unsigned long long num, int base);
 void			print_0x(t_pf *pf, char *tmp);
@@ -174,7 +172,6 @@ void			print_zero_flag_ull(t_pf *pf, int *diff, char *tmp);
 int				calc_diff(t_pf *pf, char *num);
 int				set_init_diff(t_pf *pf, char *num);
 void			print_plus_space_flag(t_pf *pf, char *num);
-void			print_zero_flag_num(t_pf *pf, int *diff, char *tmp);
 void			print_zero_flag_space_plus_flag(t_pf *pf, char **tmp);
 /*
 **		>>>>>>>>	CASTING_FUNCTIONS		<<<<<<<<

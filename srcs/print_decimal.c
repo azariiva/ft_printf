@@ -86,8 +86,8 @@ int		print_num_f(t_pf *pf, long double num)
 	if (!tmp)
 		return (-1);
 	diff = calc_diff(pf, tmp);
-	(pf->flag & ZERO_FLAG ? print_zero_flag_num(pf, &diff, tmp) : \
-								print_no_zero_flag_num(pf, &diff, tmp));
+	(pf->flag & ZERO_FLAG ? print_zero_flag_num(pf, diff, tmp) : \
+								print_no_zero_flag_num(pf, diff, tmp));
 	free(tmp);
 	return (0);
 }

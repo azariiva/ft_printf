@@ -6,7 +6,7 @@
 /*   By: fhilary <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 18:39:47 by fhilary           #+#    #+#             */
-/*   Updated: 2020/02/12 19:16:19 by blinnea          ###   ########.fr       */
+/*   Updated: 2020/02/12 19:46:06 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,37 +42,30 @@ void	print_zero_flag_space_plus_flag(t_pf *pf, char **tmp)
 		pf->len += ft_putchar_buf(&(pf->buf), ' ');
 }
 
-void	print_zero_flag_num(t_pf *pf, int *diff, char *tmp)
+void	print_zero_flag_num(t_pf *pf, int diff, char *tmp)
 {
 	if (tmp[0] == '-')
 		pf->width--;
 	if (((pf->flag & PLUS_FLAG) || (pf->flag & SPACE_FLAG)) && tmp[0] != '-')
-		(*diff)--;
+		diff--;
 	if (pf->precision == -1 && pf->data_type != 'f' && pf->data_type != 'F')
 		pf->precision = (int)ft_strlen(tmp);
-	while (pf->precision > 0 && pf->width > pf->precision
-	&& (pf->data_type != 'f' && pf->data_type != 'F') && *diff > 0)
-	{
+	while (pf->precision > 0 && pf->width-- > pf->precision
+			&& (pf->data_type != 'f' && pf->data_type != 'F') && diff-- > 0)
 		pf->len += ft_putchar_buf(&(pf->buf), ' ');
-		pf->width--;
-		(*diff)--;
-	}
 	print_zero_flag_space_plus_flag(pf, &tmp);
-	while ((*diff) > 0)
-	{
+	while (diff-- > 0)
 		pf->len += ft_putchar_buf(&(pf->buf), '0');
-		(*diff)--;
-	}
 	print_precision(pf, tmp);
 	pf->len += ft_putstr_buf(&(pf->buf), tmp);
 }
 
-void	print_no_zero_flag_num(t_pf *pf, int *diff, char *tmp)
+void	print_no_zero_flag_num(t_pf *pf, int diff, char *tmp)
 {
 	if (!(pf->flag & MIN_FLAG))
 	{
-		pf->len += ft_putcharn_buf(&(pf->buf), ' ', *diff);
-		*diff = 0;
+		pf->len += ft_putcharn_buf(&(pf->buf), ' ', diff);
+		diff = 0;
 	}
 	print_plus_space_flag(pf, tmp);
 	if (tmp[0] == '-')
@@ -86,8 +79,7 @@ void	print_no_zero_flag_num(t_pf *pf, int *diff, char *tmp)
 		print_precision(pf, tmp);
 		pf->len += ft_putstr_buf(&(pf->buf), tmp);
 	}
-	pf->len += ft_putcharn_buf(&(pf->buf), ' ', *diff);
-	*diff = 0;
+	pf->len += ft_putcharn_buf(&(pf->buf), ' ', diff);
 }
 
 int		print_num_d(t_pf *pf, long long num)
@@ -105,9 +97,9 @@ int		print_num_d(t_pf *pf, long long num)
 		return (-1);
 	diff = calc_diff(pf, tmp);
 	if (pf->flag & ZERO_FLAG)
-		print_zero_flag_num(pf, &diff, tmp);
+		print_zero_flag_num(pf, diff, tmp);
 	else
-		print_no_zero_flag_num(pf, &diff, tmp);
+		print_no_zero_flag_num(pf, diff, tmp);
 	free(tmp);
 	return (0);
 }

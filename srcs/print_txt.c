@@ -6,7 +6,7 @@
 /*   By: fhilary <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 18:39:55 by fhilary           #+#    #+#             */
-/*   Updated: 2020/02/10 18:39:57 by fhilary          ###   ########.fr       */
+/*   Updated: 2020/02/12 19:44:56 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,6 @@ int		calc_diff_s(t_pf *pf, char *str)
 	return (diff);
 }
 
-void	print_padding(t_pf *pf, int *diff)
-{
-	if (pf->flag & ZERO_FLAG)
-		ft_putcharn_buf(&(pf->buf), '0', *diff);
-	else
-		ft_putcharn_buf(&(pf->buf), ' ', *diff);
-	*diff = 0;
-}
-
 void	print_txt_s(t_pf *pf, char *str)
 {
 	int		diff;
@@ -51,14 +42,13 @@ void	print_txt_s(t_pf *pf, char *str)
 		free_b = false;
 	diff = calc_diff_s(pf, str);
 	if (!(pf->flag & MIN_FLAG))
-		print_padding(pf, &diff);
-	if (pf->precision != -1)
 	{
-		if (pf->precision > 0)
-			pf->len += ft_putstrn_buf(&(pf->buf), str, pf->precision);
-		else
-			pf->len += ft_putstr_buf(&(pf->buf), str);
+		ft_putcharn_buf(&(pf->buf), pf->flag & ZERO_FLAG ? '0' : ' ', diff);
+		diff = 0;
 	}
+	if (pf->precision != -1)
+		pf->len += (pf->precision > 0 ? ft_putstrn_buf(&(pf->buf), str, \
+					pf->precision) : ft_putstr_buf(&(pf->buf), str));
 	if (diff > 0)
 		ft_putcharn_buf(&(pf->buf), ' ', diff);
 	if (free_b == true)
