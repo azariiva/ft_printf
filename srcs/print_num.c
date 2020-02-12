@@ -19,24 +19,24 @@ void	num_prec_zero(t_pf *pf)
 	if (!(pf->flag & MIN_FLAG) && pf->width > 0)
 		print_padding_add_len(' ', &(pf->width), pf);
 	if (pf->flag & PLUS_FLAG)
-		pf->len += ft_putchar('+');
+		pf->len += ft_putchar_buf(&(pf->buf), '+');
 	if (pf->flag & SPACE_FLAG)
-		pf->len += ft_putchar(' ');
+		pf->len += ft_putchar_buf(&(pf->buf), ' ');
 	if (pf->width > 0)
-		ft_putcharn(' ', pf->width);
+		ft_putcharn_buf(&(pf->buf), ' ', pf->width);
 }
 
 void	print_zero_flag_space_plus_flag(t_pf *pf, char **tmp)
 {
 	if ((*tmp)[0] == '-')
 	{
-		pf->len += ft_putchar('-');
+		pf->len += ft_putchar_buf(&(pf->buf), '-');
 		(*tmp)++;
 	}
 	else if (pf->flag & PLUS_FLAG)
-		pf->len += ft_putchar('+');
+		pf->len += ft_putchar_buf(&(pf->buf), '+');
 	else if (pf->flag & SPACE_FLAG)
-		pf->len += ft_putchar(' ');
+		pf->len += ft_putchar_buf(&(pf->buf), ' ');
 }
 
 void	print_zero_flag_num(t_pf *pf, int *diff, char *tmp)
@@ -50,18 +50,18 @@ void	print_zero_flag_num(t_pf *pf, int *diff, char *tmp)
 	while (pf->precision > 0 && pf->width > pf->precision
 	&& (pf->data_type != 'f' && pf->data_type != 'F') && *diff > 0)
 	{
-		pf->len += ft_putchar(' ');
+		pf->len += ft_putchar_buf(&(pf->buf), ' ');
 		pf->width--;
 		(*diff)--;
 	}
 	print_zero_flag_space_plus_flag(pf, &tmp);
 	while ((*diff) > 0)
 	{
-		pf->len += ft_putchar('0');
+		pf->len += ft_putchar_buf(&(pf->buf), '0');
 		(*diff)--;
 	}
 	print_precision(pf, tmp);
-	pf->len += ft_putstr(tmp);
+	pf->len += ft_putstr_buf(&(pf->buf), tmp);
 }
 
 void	print_no_zero_flag_num(t_pf *pf, int *diff, char *tmp)
@@ -71,14 +71,14 @@ void	print_no_zero_flag_num(t_pf *pf, int *diff, char *tmp)
 	print_plus_space_flag(pf, tmp);
 	if (tmp[0] == '-')
 	{
-		pf->len += ft_putchar('-');
+		pf->len += ft_putchar_buf(&(pf->buf), '-');
 		print_precision(pf, tmp);
-		pf->len += ft_putstr(tmp + 1);
+		pf->len += ft_putstr_buf(&(pf->buf), tmp + 1);
 	}
 	else
 	{
 		print_precision(pf, tmp);
-		pf->len += ft_putstr(tmp);
+		pf->len += ft_putstr_buf(&(pf->buf), tmp);
 	}
 	print_padding_add_len(' ', diff, pf);
 }

@@ -15,17 +15,17 @@
 void	print_0x(t_pf *pf, char *tmp)
 {
 	if (pf->data_type == 'p')
-		pf->len += ft_putstr("0x");
+		pf->len += ft_putstr_buf(&(pf->buf), "0x");
 	else if ((pf->flag & HASH_FLAG) && tmp[0] != '0')
 	{
 		if (pf->data_type == 'x')
-			pf->len += ft_putstr("0x");
+			pf->len += ft_putstr_buf(&(pf->buf), "0x");
 		else if (pf->data_type == 'X')
-			pf->len += ft_putstr("0X");
+			pf->len += ft_putstr_buf(&(pf->buf), "0X");
 		else if ((pf->data_type == 'o'
 			|| pf->data_type == 'O')
 			&& (int)ft_strlen(tmp) >= pf->precision)
-			pf->len += ft_putchar('0');
+			pf->len += ft_putchar_buf(&(pf->buf), '0');
 	}
 }
 
@@ -33,7 +33,7 @@ void	print_zero_flag_ull(t_pf *pf, int *diff, char *tmp)
 {
 	if (tmp[0] == '-')
 	{
-		ft_putchar('-');
+		ft_putchar_buf(&(pf->buf), '-');
 		tmp++;
 	}
 	else
@@ -41,7 +41,7 @@ void	print_zero_flag_ull(t_pf *pf, int *diff, char *tmp)
 	pf->len++;
 	print_0x(pf, tmp);
 	print_padding_add_len('0', diff, pf);
-	pf->len += ft_putstr(tmp);
+	pf->len += ft_putstr_buf(&(pf->buf), tmp);
 }
 
 void	print_ull(t_pf *pf, int *diff, char *tmp)
@@ -50,7 +50,7 @@ void	print_ull(t_pf *pf, int *diff, char *tmp)
 		print_padding_add_len(' ', diff, pf);
 	print_0x(pf, tmp);
 	print_precision(pf, tmp);
-	pf->len += ft_putstr(tmp);
+	pf->len += ft_putstr_buf(&(pf->buf), tmp);
 	print_padding_add_len(' ', diff, pf);
 }
 
@@ -63,9 +63,9 @@ int		print_b(t_pf *pf, unsigned long long num, int base)
 	&& !((pf->flag & HASH_FLAG) && (pf->data_type == 'o' || pf->data_type == 'O')))
 	{
 		if (pf->data_type == 'p')
-			pf->len += ft_putstr("0x");
+			pf->len += ft_putstr_buf(&(pf->buf), "0x");
 		pf->len += pf->width;
-		ft_putcharn(' ', pf->width);
+		ft_putcharn_buf(&(pf->buf), ' ', pf->width);
 		return (1);
 	}
 	if (!(tmp = ft_ulltoa_base(num, base)))

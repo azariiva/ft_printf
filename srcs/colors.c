@@ -15,17 +15,17 @@
 static int	bold_colors(t_pf *pf, char *color)
 {
 	if (ft_strequ(color, "{bold red}"))
-		pf->len += ft_putstr(ANSI_BOLD_RED);
+		pf->len += ft_putstr_buf(&(pf->buf), ANSI_BOLD_RED);
 	else if (ft_strequ(color, "{bold green}"))
-		pf->len += ft_putstr(ANSI_BOLD_GREEN);
+		pf->len += ft_putstr_buf(&(pf->buf), ANSI_BOLD_GREEN);
 	else if (ft_strequ(color, "{bold yellow}"))
-		pf->len += ft_putstr(ANSI_BOLD_YELLOW);
+		pf->len += ft_putstr_buf(&(pf->buf), ANSI_BOLD_YELLOW);
 	else if (ft_strequ(color, "{bold blue}"))
-		pf->len += ft_putstr(ANSI_BOLD_BLUE);
+		pf->len += ft_putstr_buf(&(pf->buf), ANSI_BOLD_BLUE);
 	else if (ft_strequ(color, "{bold magenta}"))
-		pf->len += ft_putstr(ANSI_BOLD_MAGENTA);
+		pf->len += ft_putstr_buf(&(pf->buf), ANSI_BOLD_MAGENTA);
 	else if (ft_strequ(color, "{bold cyan}"))
-		pf->len += ft_putstr(ANSI_BOLD_CYAN);
+		pf->len += ft_putstr_buf(&(pf->buf), ANSI_BOLD_CYAN);
 	else
 		return (0);
 	return (1);
@@ -34,19 +34,19 @@ static int	bold_colors(t_pf *pf, char *color)
 static int	check_color(t_pf *pf, char *color)
 {
 	if (ft_strequ(color, "{red}"))
-		pf->len += ft_putstr(ANSI_RED);
+		pf->len += ft_putstr_buf(&(pf->buf), ANSI_RED);
 	else if (ft_strequ(color, "{green}"))
-		pf->len += ft_putstr(ANSI_GREEN);
+		pf->len += ft_putstr_buf(&(pf->buf), ANSI_GREEN);
 	else if (ft_strequ(color, "{yellow}"))
-		pf->len += ft_putstr(ANSI_YELLOW);
+		pf->len += ft_putstr_buf(&(pf->buf), ANSI_YELLOW);
 	else if (ft_strequ(color, "{blue}"))
-		pf->len += ft_putstr(ANSI_BLUE);
+		pf->len += ft_putstr_buf(&(pf->buf), ANSI_BLUE);
 	else if (ft_strequ(color, "{magenta}"))
-		pf->len += ft_putstr(ANSI_MAGENTA);
+		pf->len += ft_putstr_buf(&(pf->buf), ANSI_MAGENTA);
 	else if (ft_strequ(color, "{cyan}"))
-		pf->len += ft_putstr(ANSI_CYAN);
+		pf->len += ft_putstr_buf(&(pf->buf), ANSI_CYAN);
 	else if (ft_strequ(color, "{eoc}"))
-		pf->len += ft_putstr(ANSI_EOC);
+		pf->len += ft_putstr_buf(&(pf->buf), ANSI_EOC);
 	else if (!bold_colors(pf, color))
 		return (0);
 	return (1);

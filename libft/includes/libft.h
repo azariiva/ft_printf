@@ -128,7 +128,5 @@ void			ft_strup(char *tmp);
 long long		ft_llabs(long long n);
 char			*ft_ulltoa_base(unsigned long long value, int base);
 char			*ft_lltoa(long long n);
-void			ft_putcharn(char c, size_t n);
-int				ft_putstrn(const char *str, size_t n);
 
 #endif

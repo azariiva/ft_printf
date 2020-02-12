@@ -40,9 +40,9 @@ LIBFT_FUNCS = ft_memset ft_memdel ft_strnew ft_strdel ft_strclr ft_striter \
 			  ft_toupper ft_tolower ft_itoa ft_strsplit ft_putchar ft_putstr \
 			  ft_putendl ft_putnbr ft_abs ft_putchar_fd ft_putstr_fd \
 			  ft_putendl_fd ft_putnbr_fd ft_lstnew ft_lstdelone ft_lstdel \
-			  ft_memcmp ft_lstadd ft_lstiter ft_lstmap ft_putcharn \
+			  ft_memcmp ft_lstadd ft_lstiter ft_lstmap \
 			  ft_llabs ft_lltoa ft_ulltoa_base ft_strup\
-			  ft_cap_lftoa ft_cap_lftoa2 ft_putstrn
+			  ft_cap_lftoa ft_cap_lftoa2
 
 # object files
 LIBFT_O_FILES =  $(patsubst %, %.o, $(LIBFT_FUNCS))

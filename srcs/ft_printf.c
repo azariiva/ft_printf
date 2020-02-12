@@ -42,7 +42,7 @@ static int	loop_format(t_pf *pf, const char *fmt, va_list va)
 		if (fmt[i] == '{')
 			print_color(pf, fmt, &i);
 		if (fmt[i] != '%')
-			pf->len += ft_putchar(fmt[i]);
+			pf->len += ft_putchar_buf(&(pf->buf), fmt[i]);
 		if (fmt[i] == '%')
 			if_conversion(pf, fmt, va, &i);
 		if (fmt[i])
@@ -67,6 +67,7 @@ int		ft_printf(const char *fmt, ...)
 	va_start(va, fmt);
 	if (loop_format(pf, fmt, va))
 		return (-1);
+	ft_fflush(&(pf->buf));
 	va_end(va);
 	length = pf->len;
 	free(pf);

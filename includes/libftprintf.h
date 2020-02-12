@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include "../libft/includes/libft.h"
+# include "libbuf.h"
 
 typedef enum	e_typemod
 {
@@ -48,6 +49,7 @@ typedef struct	s_pf
 	t_typemod	modifier;
 	char		data_type;
 	int			len;
+	t_buf		buf;
 }				t_pf;
 /*
 **	n$:	n is the number of the param to use in the format

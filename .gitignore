@@ -1,3 +1,6 @@
 libft/*.o
 *.a
 obj/*.o
+*.out
+.vscode
+.DS_Store
