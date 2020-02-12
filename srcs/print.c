@@ -6,7 +6,7 @@
 /*   By: fhilary <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 18:39:25 by fhilary           #+#    #+#             */
-/*   Updated: 2020/02/10 18:39:28 by fhilary          ###   ########.fr       */
+/*   Updated: 2020/02/12 19:15:24 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	print_num(t_pf *pf, va_list va)
 {
 	long long	n;
 
-	if ((pf->modifier & LL_MOD) || (pf->modifier & J_MOD) || (pf->modifier & Z_MOD))
+	if ((pf->mod & LL_MOD) || (pf->mod & J_MOD) || (pf->mod & Z_MOD))
 		n = va_arg(va, long long);
-	else if ((pf->modifier & L_MOD) || pf->data_type == 'D')
+	else if ((pf->mod & L_MOD) || pf->data_type == 'D')
 		n = (long long)va_arg(va, long);
-	else if (pf->modifier & HH_MOD)
+	else if (pf->mod & HH_MOD)
 		n = (long long)((signed char)(va_arg(va, int)));
-	else if (pf->modifier & H_MOD)
+	else if (pf->mod & H_MOD)
 		n = (long long)((short)(va_arg(va, int)));
 	else
 		n = (long long)va_arg(va, int);
@@ -35,9 +35,9 @@ void	print_decimal(t_pf *pf, va_list va)
 
 	if (!(pf->precision))
 		pf->precision = 6;
-	if (pf->modifier & CAP_L_MOD)
+	if (pf->mod & CAP_L_MOD)
 		n = va_arg(va, long double);
-	else if (pf->modifier & L_MOD)
+	else if (pf->mod & L_MOD)
 		n = (long double)(va_arg(va, double));
 	else
 		n = (long double)(va_arg(va, double));
@@ -67,14 +67,14 @@ void	print_base(t_pf *pf, va_list va)
 	else
 		base = 10;
 	n = 0;
-	if ((pf->modifier & LL_MOD) || (pf->modifier & J_MOD))
+	if ((pf->mod & LL_MOD) || (pf->mod & J_MOD))
 		n = va_arg(va, unsigned long long);
-	else if ((pf->modifier & L_MOD) || (pf->modifier & Z_MOD) || pf->data_type == 'p'
+	else if ((pf->mod & L_MOD) || (pf->mod & Z_MOD) || pf->data_type == 'p'
 	|| pf->data_type == 'O' || pf->data_type == 'U')
 		n = va_arg(va, unsigned long);
-	else if (pf->modifier & HH_MOD)
-		n =(unsigned char)va_arg(va, unsigned int);
-	else if (pf->modifier & H_MOD)
+	else if (pf->mod & HH_MOD)
+		n = (unsigned char)va_arg(va, unsigned int);
+	else if (pf->mod & H_MOD)
 		n = (unsigned short)va_arg(va, unsigned int);
 	else
 		n = (unsigned long long)va_arg(va, unsigned int);

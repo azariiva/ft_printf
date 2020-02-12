@@ -6,7 +6,7 @@
 /*   By: fhilary <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 18:38:36 by fhilary           #+#    #+#             */
-/*   Updated: 2020/02/10 18:38:39 by fhilary          ###   ########.fr       */
+/*   Updated: 2020/02/12 19:10:27 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	reset_pf(t_pf *pf)
 	pf->flag = 0;
 	pf->width = 0;
 	pf->precision = 0;
-	pf->modifier = 0;
+	pf->mod = 0;
 	pf->data_type = 0;
 }
 
@@ -51,7 +51,7 @@ static int	loop_format(t_pf *pf, const char *fmt, va_list va)
 	return (0);
 }
 
-int		ft_printf(const char *fmt, ...)
+int			ft_printf(const char *fmt, ...)
 {
 	int		length;
 	t_pf	*pf;
@@ -63,7 +63,6 @@ int		ft_printf(const char *fmt, ...)
 		return (-1);
 	ft_bzero(pf, sizeof(t_pf));
 	pf->data_type = 1;
-
 	va_start(va, fmt);
 	if (loop_format(pf, fmt, va))
 		return (-1);
@@ -71,6 +70,5 @@ int		ft_printf(const char *fmt, ...)
 	va_end(va);
 	length = pf->len;
 	free(pf);
-	
 	return (length);
 }

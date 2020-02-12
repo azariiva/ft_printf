@@ -6,7 +6,7 @@
 /*   By: fhilary <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 18:37:24 by fhilary           #+#    #+#             */
-/*   Updated: 2020/02/10 18:37:36 by fhilary          ###   ########.fr       */
+/*   Updated: 2020/02/12 19:03:20 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef enum	e_typemod
 	HH_MOD = 1 << 3,
 	CAP_L_MOD = 1 << 4,
 	J_MOD = 1 << 5,
-	Z_MOD = 1 << 6,
+	Z_MOD = 1 << 6
 }				t_typemod;
 
 typedef enum	e_typefg
@@ -38,19 +38,7 @@ typedef enum	e_typefg
 	PLUS_FLAG = 1 << 1,
 	SPACE_FLAG = 1 << 2,
 	ZERO_FLAG = 1 << 3,
-	HASH_FLAG = 1 << 4,
-	C_FLAG = 1 << 5,
-	S_FLAG = 1 << 6,
-	P_FLAG = 1 << 7,
-	D_FLAG = 1 << 8,
-	I_FLAG = 1 << 9,
-	O_FLAG = 1 << 10,
-	U_FLAG = 1 << 11,
-	X_FLAG = 1 << 12,
-	X_CAP_FLAG = 1 << 13,
-	F_FLAG = 1 << 14,
-	PREC_FLAG = 1 << 15,
-	NOTHING_FLAG = 1 << 16,
+	HASH_FLAG = 1 << 4
 }				t_typefg;
 
 typedef struct	s_pf
@@ -58,7 +46,7 @@ typedef struct	s_pf
 	t_typefg	flag;
 	int			width;
 	int			precision;
-	t_typemod	modifier;
+	t_typemod	mod;
 	char		data_type;
 	int			len;
 	t_buf		buf;
@@ -139,14 +127,15 @@ void			set_flag(t_pf *pf, char c, int *i);
 void			set_modifier(t_pf *pf, const char *fmt, int *i);
 void			set_width(t_pf *pf, const char *fmt, va_list va, int *i);
 void			set_precision(t_pf *pf, const char *fmt, va_list va, int *i);
-void			parse_placeholder(t_pf *pf, const char *fmt, va_list va, int *i);
+void			parse_placeholder(t_pf *pf, const char *fmt, va_list va, \
+									int *i);
 
 /*
 **		>>>>>>>>	PARSE_UTIL_FUNCTIONS<<<<<<<<
 */
 int				is_flag(char c);
 int				is_modifier(char c);
-int				is_data_type(char c, t_pf *pf);
+int				is_data_type(char c);
 void			validate_flags(t_pf *pf);
 void			if_nothing(t_pf *pf, const char *fmt, int *i);
 
@@ -154,7 +143,6 @@ void			if_nothing(t_pf *pf, const char *fmt, int *i);
 **		>>>>>>>>	UTIL_FUNCTIONS		<<<<<<<<
 */
 t_pf			*create_pf_struct(void);
-void			print_padding_add_len(char c, int *diff, t_pf *pf);
 
 /*
 **		>>>>>>>>	PRINTING_FUNCTIONS	<<<<<<<<

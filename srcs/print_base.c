@@ -6,7 +6,7 @@
 /*   By: fhilary <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 18:39:32 by fhilary           #+#    #+#             */
-/*   Updated: 2020/02/10 18:39:34 by fhilary          ###   ########.fr       */
+/*   Updated: 2020/02/12 19:13:08 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,23 @@ void	print_zero_flag_ull(t_pf *pf, int *diff, char *tmp)
 		pf->len--;
 	pf->len++;
 	print_0x(pf, tmp);
-	print_padding_add_len('0', diff, pf);
+	pf->len += ft_putcharn_buf(&(pf->buf), '0', *diff);
+	*diff = 0;
 	pf->len += ft_putstr_buf(&(pf->buf), tmp);
 }
 
 void	print_ull(t_pf *pf, int *diff, char *tmp)
 {
 	if (!(pf->flag & MIN_FLAG))
-		print_padding_add_len(' ', diff, pf);
+	{
+		pf->len += ft_putcharn_buf(&(pf->buf), ' ', *diff);
+		*diff = 0;
+	}
 	print_0x(pf, tmp);
 	print_precision(pf, tmp);
 	pf->len += ft_putstr_buf(&(pf->buf), tmp);
-	print_padding_add_len(' ', diff, pf);
+	pf->len += ft_putcharn_buf(&(pf->buf), ' ', *diff);
+	*diff = 0;
 }
 
 int		print_b(t_pf *pf, unsigned long long num, int base)
@@ -59,8 +64,8 @@ int		print_b(t_pf *pf, unsigned long long num, int base)
 	int		diff;
 	char	*tmp;
 
-	if (!num && pf->precision == -1
-	&& !((pf->flag & HASH_FLAG) && (pf->data_type == 'o' || pf->data_type == 'O')))
+	if (!num && pf->precision == -1 && !((pf->flag & HASH_FLAG) && \
+				(pf->data_type == 'o' || pf->data_type == 'O')))
 	{
 		if (pf->data_type == 'p')
 			pf->len += ft_putstr_buf(&(pf->buf), "0x");

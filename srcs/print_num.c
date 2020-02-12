@@ -6,7 +6,7 @@
 /*   By: fhilary <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 18:39:47 by fhilary           #+#    #+#             */
-/*   Updated: 2020/02/10 18:39:50 by fhilary          ###   ########.fr       */
+/*   Updated: 2020/02/12 19:16:19 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void	num_prec_zero(t_pf *pf)
 	if ((pf->flag & PLUS_FLAG) || (pf->flag & SPACE_FLAG))
 		pf->width--;
 	if (!(pf->flag & MIN_FLAG) && pf->width > 0)
-		print_padding_add_len(' ', &(pf->width), pf);
+	{
+		pf->len += ft_putcharn_buf(&(pf->buf), ' ', pf->width);
+		pf->width = 0;
+	}
 	if (pf->flag & PLUS_FLAG)
 		pf->len += ft_putchar_buf(&(pf->buf), '+');
 	if (pf->flag & SPACE_FLAG)
@@ -67,7 +70,10 @@ void	print_zero_flag_num(t_pf *pf, int *diff, char *tmp)
 void	print_no_zero_flag_num(t_pf *pf, int *diff, char *tmp)
 {
 	if (!(pf->flag & MIN_FLAG))
-		print_padding_add_len(' ', diff, pf);
+	{
+		pf->len += ft_putcharn_buf(&(pf->buf), ' ', *diff);
+		*diff = 0;
+	}
 	print_plus_space_flag(pf, tmp);
 	if (tmp[0] == '-')
 	{
@@ -80,7 +86,8 @@ void	print_no_zero_flag_num(t_pf *pf, int *diff, char *tmp)
 		print_precision(pf, tmp);
 		pf->len += ft_putstr_buf(&(pf->buf), tmp);
 	}
-	print_padding_add_len(' ', diff, pf);
+	pf->len += ft_putcharn_buf(&(pf->buf), ' ', *diff);
+	*diff = 0;
 }
 
 int		print_num_d(t_pf *pf, long long num)
@@ -91,7 +98,7 @@ int		print_num_d(t_pf *pf, long long num)
 	if (!num && pf->precision == -1)
 	{
 		num_prec_zero(pf);
-		return 1;
+		return (1);
 	}
 	tmp = ft_lltoa(num);
 	if (!tmp)

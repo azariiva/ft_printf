@@ -6,7 +6,7 @@
 /*   By: fhilary <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 18:39:38 by fhilary           #+#    #+#             */
-/*   Updated: 2020/02/10 18:39:43 by fhilary          ###   ########.fr       */
+/*   Updated: 2020/02/12 19:12:39 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,8 @@ int		print_num_f(t_pf *pf, long double num)
 	if (!tmp)
 		return (-1);
 	diff = calc_diff(pf, tmp);
-	if (pf->flag & ZERO_FLAG)
-		print_zero_flag_num(pf, &diff, tmp);
-	else
-		print_no_zero_flag_num(pf, &diff, tmp);
+	(pf->flag & ZERO_FLAG ? print_zero_flag_num(pf, &diff, tmp) : \
+								print_no_zero_flag_num(pf, &diff, tmp));
 	free(tmp);
 	return (0);
 }

@@ -77,15 +77,15 @@ void	set_precision(t_pf *pf, const char *fmt, va_list va, int *i)
 void	set_modifier(t_pf *pf, const char *fmt, int *i)
 {
 	if (fmt[*i] == 'l')
-		pf->modifier |= (fmt[(*i) + 1] == 'l' ? LL_MOD : L_MOD);
+		pf->mod |= (fmt[(*i) + 1] == 'l' ? LL_MOD : L_MOD);
 	if (fmt[*i] == 'h')
-		pf->modifier |= (fmt[(*i) + 1] == 'h' ? HH_MOD : H_MOD);
+		pf->mod |= (fmt[(*i) + 1] == 'h' ? HH_MOD : H_MOD);
 	if (fmt[*i] == 'L')
-		pf->modifier |= CAP_L_MOD;
+		pf->mod |= CAP_L_MOD;
 	if (fmt[*i] == 'j')
-		pf->modifier |= J_MOD;
+		pf->mod |= J_MOD;
 	if (fmt[*i] == 'z')
-		pf->modifier |= Z_MOD;
+		pf->mod |= Z_MOD;
 	(*i)++;
 }
 

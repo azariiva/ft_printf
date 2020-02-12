@@ -6,7 +6,7 @@
 /*   By: fhilary <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 18:40:08 by fhilary           #+#    #+#             */
-/*   Updated: 2020/02/10 18:40:11 by fhilary          ###   ########.fr       */
+/*   Updated: 2020/02/12 19:15:57 by blinnea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ int		calc_diff(t_pf *pf, char *num)
 	|| ((pf->flag & HASH_FLAG) && (pf->data_type == 'x'
 	|| pf->data_type == 'X') && num[0] != '0'))
 		result -= 2;
-	if (((pf->flag & HASH_FLAG) && (pf->data_type == 'o' || pf->data_type == 'O')
-	&& num[0] != '0') && pf->precision <= (int)ft_strlen(num))
+	if (((pf->flag & HASH_FLAG) && (pf->data_type == 'o' || \
+					pf->data_type == 'O') && num[0] != '0') && \
+						pf->precision <= (int)ft_strlen(num))
 		result--;
 	if (result < 0)
 		result = 0;
