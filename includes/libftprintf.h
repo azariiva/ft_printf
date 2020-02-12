@@ -123,10 +123,6 @@ int				ft_printf(const char *format, ...);
 /*
 **		>>>>>>>>	PARSING_FUNCTIONS	<<<<<<<<
 */
-void			set_flag(t_pf *pf, char c, int *i);
-void			set_modifier(t_pf *pf, const char *fmt, int *i);
-void			set_width(t_pf *pf, const char *fmt, va_list va, int *i);
-void			set_precision(t_pf *pf, const char *fmt, va_list va, int *i);
 void			parse_placeholder(t_pf *pf, const char *fmt, va_list va, \
 									int *i);
 
@@ -153,7 +149,7 @@ void			print_precision(t_pf *pf, char *num);
 
 void			print_placeholder(t_pf *pf, va_list va);
 int				print_num_d(t_pf *pf, long long num);
-int				print_num_f(t_pf *pf, long double num);
+int				print_float(t_pf *pf, long double num);
 void			print_txt(t_pf *pf, va_list va);
 void			print_base(t_pf *pf, va_list va);
 

@@ -64,7 +64,7 @@ static void	add_dot(char **tmp)
 	*tmp = tmp2;
 }
 
-int			print_num_f(t_pf *pf, long double num)
+int			print_float(t_pf *pf, long double num)
 {
 	int		diff;
 	char	*tmp;

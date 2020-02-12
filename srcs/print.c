@@ -41,7 +41,7 @@ static void	print_decimal(t_pf *pf, va_list va)
 		n = (long double)(va_arg(va, double));
 	else
 		n = (long double)(va_arg(va, double));
-	print_num_f(pf, n);
+	print_float(pf, n);
 }
 
 void		print_txt(t_pf *pf, va_list va)

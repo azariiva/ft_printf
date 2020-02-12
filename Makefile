@@ -23,7 +23,7 @@ FT_PRINTF_SLIB = $(NAME)
 # function names
 FT_PRINTF_SRC = ft_printf parse parse_utils \
 			 	print print_num print_txt \
-				print_base print_decimal \
+				print_base print_float \
 				print_utils colors libbuf
 
 # object files

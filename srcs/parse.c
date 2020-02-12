@@ -12,7 +12,7 @@
 
 #include "libftprintf.h"
 
-void	set_flag(t_pf *pf, char c, int *i)
+static void	set_flag(t_pf *pf, char c, int *i)
 {
 	if (c == '-')
 		pf->flag |= MIN_FLAG;
@@ -27,7 +27,7 @@ void	set_flag(t_pf *pf, char c, int *i)
 	(*i)++;
 }
 
-void	set_width(t_pf *pf, const char *fmt, va_list va, int *i)
+static void	set_width(t_pf *pf, const char *fmt, va_list va, int *i)
 {
 	long	w;
 
@@ -50,7 +50,7 @@ void	set_width(t_pf *pf, const char *fmt, va_list va, int *i)
 	}
 }
 
-void	set_precision(t_pf *pf, const char *fmt, va_list va, int *i)
+static void	set_precision(t_pf *pf, const char *fmt, va_list va, int *i)
 {
 	int	w;
 
@@ -74,7 +74,7 @@ void	set_precision(t_pf *pf, const char *fmt, va_list va, int *i)
 		(*i)++;
 }
 
-void	set_modifier(t_pf *pf, const char *fmt, int *i)
+static void	set_modifier(t_pf *pf, const char *fmt, int *i)
 {
 	if (fmt[*i] == 'l')
 		pf->mod |= (fmt[(*i) + 1] == 'l' ? LL_MOD : L_MOD);
@@ -89,7 +89,7 @@ void	set_modifier(t_pf *pf, const char *fmt, int *i)
 	(*i)++;
 }
 
-void	parse_placeholder(t_pf *pf, const char *fmt, va_list va, int *i)
+void		parse_placeholder(t_pf *pf, const char *fmt, va_list va, int *i)
 {
 	(*i)++;
 	while (!(pf->data_type))
