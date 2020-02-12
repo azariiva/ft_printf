@@ -12,49 +12,49 @@
 
 #include "libftprintf.h"
 
-void	print_num(t_pf *pf)
+void	print_num(t_pf *pf, va_list va)
 {
 	long long	n;
 
 	if ((pf->modifier & LL_MOD) || (pf->modifier & J_MOD) || (pf->modifier & Z_MOD))
-		n = va_arg(*(pf->valist), long long);
+		n = va_arg(va, long long);
 	else if ((pf->modifier & L_MOD) || pf->data_type == 'D')
-		n = (long long)va_arg(*(pf->valist), long);
+		n = (long long)va_arg(va, long);
 	else if (pf->modifier & HH_MOD)
-		n = (long long)((signed char)(va_arg(*(pf->valist), int)));
+		n = (long long)((signed char)(va_arg(va, int)));
 	else if (pf->modifier & H_MOD)
-		n = (long long)((short)(va_arg(*(pf->valist), int)));
+		n = (long long)((short)(va_arg(va, int)));
 	else
-		n = (long long)va_arg(*(pf->valist), int);
+		n = (long long)va_arg(va, int);
 	print_num_d(pf, n);
 }
 
-void	print_decimal(t_pf *pf)
+void	print_decimal(t_pf *pf, va_list va)
 {
 	long double	n;
 
 	if (!(pf->precision))
 		pf->precision = 6;
 	if (pf->modifier & CAP_L_MOD)
-		n = va_arg(*(pf->valist), long double);
+		n = va_arg(va, long double);
 	else if (pf->modifier & L_MOD)
-		n = (long double)(va_arg(*(pf->valist), double));
+		n = (long double)(va_arg(va, double));
 	else
-		n = (long double)(va_arg(*(pf->valist), double));
+		n = (long double)(va_arg(va, double));
 	print_num_f(pf, n);
 }
 
-void	print_txt(t_pf *pf)
+void	print_txt(t_pf *pf, va_list va)
 {
 	if (pf->data_type == 's')
-		print_txt_s(pf, va_arg(*(pf->valist), char*));
+		print_txt_s(pf, va_arg(va, char*));
 	else if (pf->data_type == 'c')
-		print_txt_c(pf, (char)(va_arg(*(pf->valist), char*)));
+		print_txt_c(pf, (char)(va_arg(va, char*)));
 	if (pf->data_type == '%')
 		print_txt_c(pf, '%');
 }
 
-void	print_base(t_pf *pf)
+void	print_base(t_pf *pf, va_list va)
 {
 	int					base;
 	unsigned long long	n;
@@ -68,35 +68,33 @@ void	print_base(t_pf *pf)
 		base = 10;
 	n = 0;
 	if ((pf->modifier & LL_MOD) || (pf->modifier & J_MOD))
-		n = va_arg(*(pf->valist), unsigned long long);
+		n = va_arg(va, unsigned long long);
 	else if ((pf->modifier & L_MOD) || (pf->modifier & Z_MOD) || pf->data_type == 'p'
 	|| pf->data_type == 'O' || pf->data_type == 'U')
-		n = (unsigned long long)va_arg(*(pf->valist), unsigned long);
+		n = va_arg(va, unsigned long);
 	else if (pf->modifier & HH_MOD)
-		n = (unsigned long long)((unsigned char)va_arg(*(pf->valist),
-			unsigned int));
+		n =(unsigned char)va_arg(va, unsigned int);
 	else if (pf->modifier & H_MOD)
-		n = (unsigned long long)((unsigned short)va_arg(*(pf->valist),
-			unsigned int));
+		n = (unsigned short)va_arg(va, unsigned int);
 	else
-		n = (unsigned long long)va_arg(*(pf->valist), unsigned int);
+		n = (unsigned long long)va_arg(va, unsigned int);
 	print_b(pf, n, base);
 }
 
-void	print_placeholder(t_pf *pf)
+void	print_placeholder(t_pf *pf, va_list va)
 {
 	if (pf->data_type == 'd' || pf->data_type == 'D'
 	|| pf->data_type == 'i')
-		print_num(pf);
+		print_num(pf, va);
 	if (pf->data_type == 'f' || pf->data_type == 'F')
-		print_decimal(pf);
+		print_decimal(pf, va);
 	else if (pf->data_type == 'o' || pf->data_type == 'O'
 	|| pf->data_type == 'u' || pf->data_type == 'U'
 	|| pf->data_type == 'x' || pf->data_type == 'X'
 	|| pf->data_type == 'p')
-		print_base(pf);
+		print_base(pf, va);
 	else if (pf->data_type == 's' || pf->data_type == 'S'
 	|| pf->data_type == 'c' || pf->data_type == 'C'
 	|| pf->data_type == '%')
-		print_txt(pf);
+		print_txt(pf, va);
 }

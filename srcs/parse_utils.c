@@ -12,9 +12,9 @@
 
 #include "libftprintf.h"
 
-void	if_nothing(t_pf *pf, char *str, int *i)
+void	if_nothing(t_pf *pf, const char *fmt, int *i)
 {
-	if (str[*i])
+	if (fmt[*i])
 	{
 		pf->data_type = 'c';
 		validate_flags(pf);

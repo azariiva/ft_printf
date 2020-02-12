@@ -42,18 +42,12 @@ typedef enum	e_typefg
 
 typedef struct	s_pf
 {
-	short		options;
-	int			paramater;
-	int			if_param;
 	t_typefg	flag;
-	short		flags;
 	int			width;
 	int			precision;
 	t_typemod	modifier;
 	char		data_type;
 	int			len;
-	va_list		*valist;
-	char		*format;
 }				t_pf;
 /*
 **	n$:	n is the number of the param to use in the format
@@ -120,21 +114,18 @@ typedef struct	s_pf
 # define ANSI_EOC "\e[0m"
 
 /*
-**		>>>>>>>>	MAIN_FUNCTIONS		<<<<<<<<
+**		>>>>>>>>	MAIN_FUNCTION		<<<<<<<<
 */
-void			reset_pf(t_pf *pf);
-void			if_conversion(t_pf *pf, int *i);
 int				ft_printf(const char *format, ...);
-int				loop_format(t_pf *pf);
 
 /*
 **		>>>>>>>>	PARSING_FUNCTIONS	<<<<<<<<
 */
 void			set_flag(t_pf *pf, char c, int *i);
-void			set_modifier(t_pf *pf, char *str, int *i);
-void			set_width(t_pf *pf, char *str, int *i, va_list valist);
-void			set_precision(t_pf *pf, char *str, int *i, va_list valist);
-void			parse_placeholder(t_pf *pf, char *str, int *i, va_list valist);
+void			set_modifier(t_pf *pf, const char *fmt, int *i);
+void			set_width(t_pf *pf, const char *fmt, va_list va, int *i);
+void			set_precision(t_pf *pf, const char *fmt, int *i, va_list valist);
+void			parse_placeholder(t_pf *pf, const char *fmt, int *i, va_list valist);
 
 /*
 **		>>>>>>>>	PARSE_UTIL_FUNCTIONS<<<<<<<<
@@ -143,7 +134,7 @@ int				is_flag(char c);
 int				is_modifier(char c);
 int				is_data_type(char c);
 void			validate_flags(t_pf *pf);
-void			if_nothing(t_pf *pf, char *str, int *i);
+void			if_nothing(t_pf *pf, const char *fmt, int *i);
 
 /*
 **		>>>>>>>>	UTIL_FUNCTIONS		<<<<<<<<
@@ -159,12 +150,12 @@ void			print_no_zero_flag_num(t_pf *pf, int *diff, char *tmp);
 void			print_precision(t_pf *pf, char *num);
 void			print_padding(t_pf *pf, int *diff);
 
-void			print_placeholder(t_pf *pf);
-void			print_num(t_pf *pf);
+void			print_placeholder(t_pf *pf, va_list va);
+void			print_num(t_pf *pf, va_list va);
 int				print_num_d(t_pf *pf, long long num);
 int				print_num_f(t_pf *pf, long double num);
-void			print_txt(t_pf *pf);
-void			print_base(t_pf *pf);
+void			print_txt(t_pf *pf, va_list va);
+void			print_base(t_pf *pf, va_list va);
 
 void			print_txt_c(t_pf *pf, char c);
 void			print_txt_s(t_pf *pf, char *str);
@@ -181,7 +172,6 @@ void			print_zero_flag_ull(t_pf *pf, int *diff, char *tmp);
 int				calc_diff(t_pf *pf, char *num);
 int				set_init_diff(t_pf *pf, char *num);
 void			print_plus_space_flag(t_pf *pf, char *num);
-void			print_padding_add_len(char c, int *diff, t_pf *pf);
 void			print_zero_flag_num(t_pf *pf, int *diff, char *tmp);
 void			print_zero_flag_space_plus_flag(t_pf *pf, char **tmp);
 /*
@@ -196,6 +186,6 @@ void			cast_placeholder(t_pf *pf, va_list valist);
 /*
 **		>>>>>>>>	COLOR_FUNCTIONS			<<<<<<<<
 */
-void			print_color(t_pf *pf, char *format, int *i);
+void			print_color(t_pf *pf, const char *fmt, int *i);
 
 #endif

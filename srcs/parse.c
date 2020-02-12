@@ -27,13 +27,13 @@ void	set_flag(t_pf *pf, char c, int *i)
 	(*i)++;
 }
 
-void	set_width(t_pf *pf, char *fmt, int *i, va_list valist)
+void	set_width(t_pf *pf, const char *fmt, va_list va, int *i)
 {
 	long	w;
 
 	if (fmt[*i] == '*')
 	{
-		w = (long)va_arg(valist, int);
+		w = (long)va_arg(va, int);
 		if (w < 0)
 		{
 			w *= -1;
@@ -50,7 +50,7 @@ void	set_width(t_pf *pf, char *fmt, int *i, va_list valist)
 	}
 }
 
-void	set_precision(t_pf *pf, char *fmt, int *i, va_list valist)
+void	set_precision(t_pf *pf, const char *fmt, int *i, va_list valist)
 {
 	long	w;
 
@@ -76,7 +76,7 @@ void	set_precision(t_pf *pf, char *fmt, int *i, va_list valist)
 		(*i)++;
 }
 
-void	set_modifier(t_pf *pf, char *fmt, int *i)
+void	set_modifier(t_pf *pf, const char *fmt, int *i)
 {
 	if (fmt[*i] == 'l')
 	{
@@ -101,7 +101,7 @@ void	set_modifier(t_pf *pf, char *fmt, int *i)
 	(*i)++;
 }
 
-void	parse_placeholder(t_pf *pf, char *fmt, int *i, va_list va)
+void	parse_placeholder(t_pf *pf, const char *fmt, int *i, va_list va)
 {
 	(*i)++;
 	while (!(pf->data_type))
@@ -109,7 +109,7 @@ void	parse_placeholder(t_pf *pf, char *fmt, int *i, va_list va)
 		if (is_flag(fmt[*i]))
 			set_flag(pf, fmt[*i], i);
 		else if ((fmt[*i] >= '1' && fmt[*i] <= '9') || fmt[*i] == '*')
-			set_width(pf, fmt, i, va);
+			set_width(pf, fmt, va, i);
 		else if (fmt[*i] == '.')
 			set_precision(pf, fmt, i, va);
 		else if (is_modifier(fmt[*i]))

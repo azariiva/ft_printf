@@ -57,19 +57,15 @@ int		calc_diff(t_pf *pf, char *num)
 void	print_precision(t_pf *pf, char *num)
 {
 	if (num[0] == '-')
-	{
 		while (pf->precision > 0 && pf->precision > (int)ft_strlen(&num[1]))
 		{
 			pf->len += ft_putchar('0');
 			pf->precision--;
 		}
-	}
 	else
-	{
 		while (pf->precision > 0 && pf->precision > (int)ft_strlen(num))
 		{
 			pf->len += ft_putchar('0');
 			pf->precision--;
 		}
-	}
 }

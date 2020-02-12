@@ -52,16 +52,16 @@ static int	check_color(t_pf *pf, char *color)
 	return (1);
 }
 
-void		print_color(t_pf *pf, char *format, int *i)
+void		print_color(t_pf *pf, const char *fmt, int *i)
 {
 	char	*ptr;
 	char	*color;
 
-	if ((ptr = ft_strchr(format + *i, '}')))
+	if ((ptr = ft_strchr(fmt + *i, '}')))
 	{
-		color = ft_strsub(format, *i, (size_t)(ptr + 1 - *i - format));
+		color = ft_strsub(fmt, *i, (size_t)(ptr + 1 - *i - fmt));
 		if (check_color(pf, color))
-			*i = ptr - format + 1;
+			*i = ptr - fmt + 1;
 		free(color);
 	}
 }
