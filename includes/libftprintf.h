@@ -124,8 +124,8 @@ int				ft_printf(const char *format, ...);
 void			set_flag(t_pf *pf, char c, int *i);
 void			set_modifier(t_pf *pf, const char *fmt, int *i);
 void			set_width(t_pf *pf, const char *fmt, va_list va, int *i);
-void			set_precision(t_pf *pf, const char *fmt, int *i, va_list valist);
-void			parse_placeholder(t_pf *pf, const char *fmt, int *i, va_list valist);
+void			set_precision(t_pf *pf, const char *fmt, va_list va, int *i);
+void			parse_placeholder(t_pf *pf, const char *fmt, va_list va, int *i);
 
 /*
 **		>>>>>>>>	PARSE_UTIL_FUNCTIONS<<<<<<<<

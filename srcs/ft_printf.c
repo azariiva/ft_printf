@@ -23,7 +23,7 @@ static void	reset_pf(t_pf *pf)
 
 static void	if_conversion(t_pf *pf, const char *fmt, va_list va, int *i)
 {
-	parse_placeholder(pf, fmt, i, va);
+	parse_placeholder(pf, fmt, va, i);
 	if ((pf->data_type) > 0)
 		print_placeholder(pf, va);
 	if ((pf->data_type) == -1 && fmt[*i])

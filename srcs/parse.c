@@ -50,17 +50,15 @@ void	set_width(t_pf *pf, const char *fmt, va_list va, int *i)
 	}
 }
 
-void	set_precision(t_pf *pf, const char *fmt, int *i, va_list valist)
+void	set_precision(t_pf *pf, const char *fmt, va_list va, int *i)
 {
-	long	w;
+	int	w;
 
-	(*i)++;
-	if (fmt[*i] == '*')
+	if (fmt[++(*i)] == '*')
 	{
-		w = (long)va_arg(valist, int);
-		if (w >= 0)
+		if ((w = va_arg(va, int)) >= 0)
 		{
-			pf->precision = (int)w;
+			pf->precision = w;
 			if (pf->precision == 0)
 				pf->precision = -1;
 		}
@@ -68,30 +66,20 @@ void	set_precision(t_pf *pf, const char *fmt, int *i, va_list valist)
 	}
 	else
 	{
-		pf->precision = ft_atoi(&fmt[*i]);
+		pf->precision = ft_atoi(fmt + *i);
 		if (pf->precision <= 0)
 			pf->precision = -1;
 	}
-	while (fmt[*i] >= '0' && fmt[*i] <= '9')
+	while (ft_isdigit(fmt[*i]))
 		(*i)++;
 }
 
 void	set_modifier(t_pf *pf, const char *fmt, int *i)
 {
 	if (fmt[*i] == 'l')
-	{
-		if (fmt[(*i) + 1] == 'l')
-			pf->modifier |= LL_MOD;
-		else
-			pf->modifier |= L_MOD;
-	}
+		pf->modifier |= (fmt[(*i) + 1] == 'l' ? LL_MOD : L_MOD);
 	if (fmt[*i] == 'h')
-	{
-		if (fmt[(*i) + 1] == 'h')
-			pf->modifier |= HH_MOD;
-		else
-			pf->modifier |= H_MOD;
-	}
+		pf->modifier |= (fmt[(*i) + 1] == 'h' ? HH_MOD : H_MOD);
 	if (fmt[*i] == 'L')
 		pf->modifier |= CAP_L_MOD;
 	if (fmt[*i] == 'j')
@@ -101,7 +89,7 @@ void	set_modifier(t_pf *pf, const char *fmt, int *i)
 	(*i)++;
 }
 
-void	parse_placeholder(t_pf *pf, const char *fmt, int *i, va_list va)
+void	parse_placeholder(t_pf *pf, const char *fmt, va_list va, int *i)
 {
 	(*i)++;
 	while (!(pf->data_type))
@@ -111,7 +99,7 @@ void	parse_placeholder(t_pf *pf, const char *fmt, int *i, va_list va)
 		else if ((fmt[*i] >= '1' && fmt[*i] <= '9') || fmt[*i] == '*')
 			set_width(pf, fmt, va, i);
 		else if (fmt[*i] == '.')
-			set_precision(pf, fmt, i, va);
+			set_precision(pf, fmt, va, i);
 		else if (is_modifier(fmt[*i]))
 			set_modifier(pf, fmt, i);
 		else if (is_data_type(fmt[*i]))
